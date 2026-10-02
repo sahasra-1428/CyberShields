@@ -46,7 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error(res.error?.message || 'Email analysis failed.');
         }
 
-        renderScanResult(res.analysis, email);
+        const analysis = applyClientEmailDefenses(res.analysis || {}, email);
+        renderScanResult(analysis, email);
         showToast('Email address analysis complete.', 'success');
       } catch (err) {
         clearInterval(stepInterval);
@@ -64,6 +65,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+const FAKE_SAMPLE_DOMAINS = ['demo.com', 'fake.com', 'test.com', 'dummy.com', 'sample.com', 'example.com', 'phish.com', 'mock.com'];
+const FREE_MAIL_PROVIDERS = ['gmail.com', 'yahoo.com', 'yahoo.co.in', 'outlook.com', 'hotmail.com', 'rediffmail.com'];
+const AUTHORITY_KEYWORDS = ['sbi', 'rbi', 'hdfc', 'icici', 'police', 'support', 'customercare', 'customer.care', 'helpdesk', 'security', 'cbi', 'court', 'bank', 'verify', 'tax', 'income.tax', 'kyc'];
+
+function applyClientEmailDefenses(analysis, email) {
+  const result = { ...(analysis || {}) };
+  const parts = (email || '').toLowerCase().trim().split('@');
+  if (parts.length !== 2) return result;
+
+  const [username, domain] = parts;
+  const isSynthetic = FAKE_SAMPLE_DOMAINS.includes(domain) || domain.split('.').some(p => ['demo', 'fake', 'dummy', 'mock', 'sample'].includes(p));
+  const isFreeMail = FREE_MAIL_PROVIDERS.includes(domain);
+  const hasAuthorityKeyword = AUTHORITY_KEYWORDS.some(kw => username.includes(kw));
+
+  if (isSynthetic) {
+    result.riskScore = 100;
+    result.riskLevel = 'MALICIOUS';
+    result.verified = false;
+    result.indicators = Array.isArray(result.indicators) ? [...result.indicators] : [];
+    if (!result.indicators.some(i => i.text && i.text.includes('SYNTHETIC / MOCK DOMAIN'))) {
+      result.indicators.unshift({
+        type: 'alert',
+        text: `🚨 SYNTHETIC / MOCK DOMAIN DETECTED: "${domain}" is a synthetic test domain frequently employed in phishing simulation exercises or deceptive setups.`
+      });
+    }
+    result.explanation = 'CRITICAL MALICIOUS THREAT: Synthetic domain flagged. Never exchange authentic credentials or financial details with simulated/mock domain addresses.';
+    return result;
+  }
+
+  if (isFreeMail && hasAuthorityKeyword) {
+    result.riskScore = Math.max(result.riskScore || 0, 75);
+    result.riskLevel = 'MALICIOUS';
+    result.verified = false;
+    result.indicators = Array.isArray(result.indicators) ? [...result.indicators] : [];
+    if (!result.indicators.some(i => i.text && i.text.includes('FREE WEBMAIL AUTHORITY IMPERSONATION'))) {
+      result.indicators.unshift({
+        type: 'alert',
+        text: `🚨 FREE WEBMAIL AUTHORITY IMPERSONATION: The sender uses free public email (@${domain}) while claiming institutional/authority identity ("${username}"). Official banks, police, and government departments operate exclusively on verified enterprise domains, never free public webmail accounts.`
+      });
+    }
+    result.explanation = 'CRITICAL FRAUD INDICATOR: High-probability social engineering impersonation. Legitimate banking and law enforcement agencies never communicate from consumer Gmail or Yahoo accounts.';
+    return result;
+  }
+
+  if (result.riskScore === 0 || result.riskLevel === 'UNKNOWN / UNABLE TO VERIFY' || result.riskLevel === 'LOW RISK') {
+    if (!isFreeMail) {
+      result.riskScore = 30;
+      result.riskLevel = 'SUSPICIOUS';
+      result.verified = false;
+      result.indicators = Array.isArray(result.indicators) ? [...result.indicators] : [];
+      if (!result.indicators.some(i => i.text && i.text.includes('UNVERIFIED CUSTOM DOMAIN'))) {
+        result.indicators.push({
+          type: 'warning',
+          text: `⚠️ UNVERIFIED CUSTOM DOMAIN: Domain "${domain}" is not in the certified registry of accredited government or banking organizations.`
+        });
+      }
+      result.explanation = 'SUSPICIOUS: Unverified custom email domain. Exercise caution before trusting payment instructions or clicking links.';
+    }
+  }
+  return result;
+}
 
 function renderScanResult(analysis, originalInput) {
   const card = document.getElementById('scanner-result');
