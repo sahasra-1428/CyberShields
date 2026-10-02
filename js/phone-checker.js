@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error(res.error?.message || 'Phone analysis failed.');
         }
 
-        renderScanResult(res.analysis, phone);
+        const analysis = applyClientPhoneDefenses(res.analysis || {}, phone);
+        renderScanResult(analysis, phone);
         showToast('Phone number verification completed.', 'success');
       } catch (err) {
         clearInterval(stepInterval);
@@ -76,6 +77,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+const VERIFIED_INSTITUTIONS = [
+  '1930', '112', '100', '1091', '1098', '1075',
+  '1800112211', '18004253800', '18002026161', '18001080',
+  '18002584455', '18001031906', '14440'
+];
+
+function applyClientPhoneDefenses(analysis, phone) {
+  const result = { ...(analysis || {}) };
+  const digits = (phone || '').replace(/\D/g, '');
+  const cleanDigits = digits.length > 10 && digits.startsWith('91') ? digits.slice(2) : digits;
+  const isVerified = VERIFIED_INSTITUTIONS.includes(cleanDigits) || VERIFIED_INSTITUTIONS.includes(digits);
+
+  if (isVerified) {
+    result.riskLevel = 'LOW RISK';
+    result.riskScore = 0;
+    result.verified = true;
+    return result;
+  }
+
+  // If unverified 10-digit mobile number or server returned 0 / UNKNOWN
+  if (!isVerified && (result.riskScore === 0 || result.riskLevel === 'UNKNOWN / UNABLE TO VERIFY' || result.riskLevel === 'LOW RISK')) {
+    const isStandard10Digit = cleanDigits.length === 10;
+    result.riskScore = isStandard10Digit ? 35 : 30;
+    result.riskLevel = 'SUSPICIOUS';
+    result.verified = false;
+    result.indicators = Array.isArray(result.indicators) ? [...result.indicators] : [];
+
+    if (isStandard10Digit) {
+      if (!result.indicators.some(i => i.text && i.text.includes('UNVERIFIED PERSONAL MOBILE LINE'))) {
+        result.indicators.unshift({
+          type: 'warning',
+          text: '⚠️ UNVERIFIED PERSONAL MOBILE LINE: Standard 10-digit personal cellular number. Not registered as an institutional bank, police, or government helpline.'
+        });
+      }
+      if (!result.indicators.some(i => i.text && i.text.includes('AUTHORITY CHECK WARNING'))) {
+        result.indicators.push({
+          type: 'alert',
+          text: '🚨 AUTHORITY CHECK WARNING: Scammers frequently use unverified mobile numbers to impersonate banks, police, courier agents, and tax officers.'
+        });
+      }
+      result.explanation = 'SUSPICIOUS: Unverified personal cellular number. Official government authorities, banks, and law enforcement agencies never conduct official operations or demand money transfers via private 10-digit mobile numbers.';
+    } else {
+      if (!result.indicators.some(i => i.text && i.text.includes('UNVERIFIED ORIGIN'))) {
+        result.indicators.unshift({
+          type: 'warning',
+          text: '⚠️ UNVERIFIED ORIGIN: Number has no public enterprise or institutional verification credentials.'
+        });
+      }
+      result.explanation = 'SUSPICIOUS: Unverified communication origin. Proceed with caution and do not disclose sensitive financial credentials.';
+    }
+
+    if (!result.recommendations || result.recommendations.length === 0) {
+      result.recommendations = [
+        'Do not share OTPs, PINs, or net banking passwords over this call or SMS.',
+        'If the caller claims to represent an official authority, hang up and dial their official published helpline directly.',
+        'Report fraudulent calls immediately to 1930 or cybercrime.gov.in.'
+      ];
+    }
+  }
+  return result;
+}
 
 function renderScanResult(analysis, originalInput) {
   const card = document.getElementById('scanner-result');
