@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin User Management | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="admin-dashboard.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD <span style="font-size:0.65rem; color:#ef4444; border:1px solid rgba(239,68,68,0.4); padding:1px 5px; border-radius:4px; margin-left:4px;">ADMIN</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Operations</div>
+        <a href="admin-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="admin-users.html" class="sidebar-link active">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Users
+        </a>
+        <a href="admin-scans.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Scans
+        </a>
+        <a href="admin-reports.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Reports
+        </a>
+
+        <div class="nav-section-title">Portals</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          Citizen Dashboard
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Citizen Directory &amp; Access Controls</h2>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <!-- Filter Controls -->
+        <div class="admin-filter-bar">
+          <div>
+            <label style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; display:block; margin-bottom:4px;">Account Role</label>
+            <select class="admin-select" id="admin-user-role-filter">
+              <option value="all">All Roles</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; display:block; margin-bottom:4px;">Account Status</label>
+            <select class="admin-select" id="admin-user-status-filter">
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+              <option value="suspended">Suspended</option>
+            </select>
+          </div>
+
+          <div style="flex:1; min-width:200px;">
+            <label style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; display:block; margin-bottom:4px;">Search Directory</label>
+            <input type="text" class="form-input" id="admin-user-search" placeholder="Search by name, email or phone..." style="padding:7px 12px; font-size:0.88rem;">
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="table-card">
+          <table class="cyber-table">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Full Name</th>
+                <th>Email Address</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Registered</th>
+                <th>Last Login</th>
+                <th>Scans</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-tbody">
+              <tr>
+                <td colspan="9" style="text-align:center; padding:30px; color:var(--text-muted);">
+                  Querying citizen user records...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

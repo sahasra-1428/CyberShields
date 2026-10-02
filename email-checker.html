@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Security Checker | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/scanner.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+
+        <div class="nav-section-title">Detection Engines</div>
+        <a href="url-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          URL Scanner
+        </a>
+        <a href="scam-detector.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Scam Detector
+        </a>
+        <a href="email-checker.html" class="sidebar-link active">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Checker
+        </a>
+        <a href="phone-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone Checker
+        </a>
+        <a href="qr-scanner.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          QR Scanner
+        </a>
+
+        <div class="nav-section-title">Personal Security</div>
+        <a href="scan-history.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Scan History
+        </a>
+        <a href="security-score.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Security Score
+        </a>
+        <a href="awareness.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Awareness Hub
+        </a>
+        <a href="quiz.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          Cyber Crime Quiz
+        </a>
+        <a href="emergency-playbook.html" class="sidebar-link" style="color:#ef4444; font-weight:700;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+          Emergency Playbook 🚨
+        </a>
+        <a href="simulator.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+          Threat Simulator 🧪
+        </a>
+        <a href="report.html" class="sidebar-link" style="color: #f87171;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Report to Cyber Agents 🚨
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Email Address Verification</h2>
+        </div>
+        <div class="topbar-right">
+          <a href="report.html" class="btn btn-outline btn-sm">Report Phishing Email</a>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <div class="scanner-container">
+          <div class="scanner-intro">
+            <h2>Domain Spoofing &amp; Typosquatting Checker</h2>
+            <p>
+              Inspect sender addresses for brand homoglyphs (e.g. <code>paypa1.com</code>), disposable inbox services, and unauthorized corporate claims before responding or opening attachments.
+            </p>
+          </div>
+
+          <div class="scanner-input-card">
+            <form id="email-scan-form">
+              <div class="scanner-input-group">
+                <div class="scanner-input-wrapper">
+                  <span class="scanner-input-icon">✉️</span>
+                  <input type="email" id="email-input" class="scanner-text-input" placeholder="Enter suspicious sender email (e.g. support@paypa1.com)" required autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-analyze-email">
+                  Verify Email
+                </button>
+              </div>
+            </form>
+
+            <div style="margin-top: 18px; display:flex; align-items:center; flex-wrap:wrap; gap:8px;">
+              <span style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Simulated Vectors:</span>
+              <button type="button" class="btn btn-secondary btn-sm sample-email-btn" data-email="security-alert@paypa1.com">paypa1.com (Typosquatting)</button>
+              <button type="button" class="btn btn-secondary btn-sm sample-email-btn" data-email="customer-care@sbi-official-alert.net">sbi-official-alert.net (Bank Spoof)</button>
+              <button type="button" class="btn btn-secondary btn-sm sample-email-btn" data-email="temp.user@mailinator.com">user@mailinator.com (Disposable)</button>
+              <button type="button" class="btn btn-secondary btn-sm sample-email-btn" data-email="hr-recruiter@netflix-jobs.xyz">netflix-jobs.xyz (High-Risk TLD)</button>
+              <button type="button" class="btn btn-secondary btn-sm sample-email-btn" data-email="billing-update@amazon.orders-verify.com">amazon.orders-verify.com (Subdomain)</button>
+              <button type="button" class="btn btn-secondary btn-sm sample-email-btn" data-email="notifications@github.com">notifications@github.com (Reputable)</button>
+            </div>
+          </div>
+
+          <div class="loading-box" id="scanner-loading">
+            <div class="cyber-radar-spinner"></div>
+            <div class="loading-text">Analyzing Email Authenticity</div>
+            <div class="loading-steps-indicator" id="loading-step-text">Checking domain structures...</div>
+          </div>
+
+          <div class="result-card" id="scanner-result">
+            <div class="result-header">
+              <div class="result-title-group">
+                <span class="risk-level-tag badge-risk" id="result-risk-tag">UNKNOWN</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Email Sender Profile</span>
+              </div>
+
+              <div class="score-meter-wrap">
+                <span style="font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Threat Score:</span>
+                <span class="score-number" id="result-score-num">0</span>
+                <span style="font-size:0.9rem; color:var(--text-muted);">/ 100</span>
+                <div class="score-bar-bg">
+                  <div class="score-bar-fill" id="result-score-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="result-body">
+              <div class="explain-section">
+                <h4>What was found &amp; Analysis Reason</h4>
+                <div class="explain-text" id="result-explanation"></div>
+              </div>
+
+              <div class="explain-section">
+                <h4>Sender Domain Indicators</h4>
+                <div class="indicators-list" id="result-indicators-list"></div>
+              </div>
+
+              <div class="recommendation-box">
+                <h4>Recommended Security Action</h4>
+                <ul class="recommendation-list" id="result-recommendations-list"></ul>
+              </div>
+
+              <!-- Cyber Agent Escalation Card -->
+              <div class="agent-dispatch-box" id="result-agent-dispatch-box" style="margin-top:20px; padding:16px 20px; background:rgba(239, 68, 68, 0.08); border:1px solid rgba(239, 68, 68, 0.4); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                <div>
+                  <div style="font-size:0.88rem; font-weight:700; color:#f87171; display:flex; align-items:center; gap:6px;">
+                    <span>🚨</span> Phishing Email Detected? Report to Cyber Crime Agents
+                  </div>
+                  <div style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">
+                    Forward sender domain indicators and spoofing headers directly to CERT-In Incident Response Unit and I4C.
+                  </div>
+                </div>
+                <a href="report.html" id="btn-escalate-cyber-agent" class="btn btn-danger btn-sm" style="background:#dc2626; border-color:#ef4444; font-weight:700; text-decoration:none;">
+                  🚨 Report to Cyber Agents
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- COMPREHENSIVE EMAIL DETECTION GUIDE        -->
+          <!-- ========================================== -->
+          <div class="card" style="margin-top: 36px; padding: 28px; border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(9, 14, 26, 0.75);">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+              <div>
+                <span style="font-size:0.75rem; text-transform:uppercase; color:var(--cyan); font-weight:700; letter-spacing:0.08em;">Educational Reference Architecture</span>
+                <h3 style="font-size:1.4rem; margin-top:4px; color:#fff;">How to Identify Spoofed &amp; Phishing Email Addresses</h3>
+              </div>
+              <span class="badge-risk low-risk" style="font-size:0.75rem;">Mail Integrity Guide</span>
+            </div>
+
+            <!-- Visual Anatomy of a Spoofed Email -->
+            <div style="margin-bottom: 28px;">
+              <h4 style="font-size:0.95rem; color:var(--cyan); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">1. Anatomy of a Spoofed Email Address</h4>
+              <div style="background: rgba(6, 12, 26, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 18px; overflow-x:auto;">
+                <div style="font-family: var(--font-mono); font-size: 0.95rem; display: flex; align-items: center; gap: 4px; white-space: nowrap; margin-bottom: 16px;">
+                  <span style="background: rgba(239, 68, 68, 0.2); color: #f87171; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(239,68,68,0.4);" title="Cosmetic Display Name">"PayPal Security Desk"</span>
+                  <span style="color:#94a3b8;">&lt;</span>
+                  <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(16,185,129,0.4);" title="Mailbox User">urgent-alert</span>
+                  <span style="color:var(--cyan); font-weight:700;">@</span>
+                  <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(245,158,11,0.4); font-weight:700;" title="Typosquatted Brand Domain">paypa1</span>
+                  <span style="background: rgba(239, 68, 68, 0.2); color: #f87171; padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(239,68,68,0.4);" title="Top-Level Domain">.com</span>
+                  <span style="color:#94a3b8;">&gt;</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.82rem;">
+                  <div style="color: #f87171;"><strong style="display:block;">Display Name ("PayPal Security")</strong> Free text that anyone can set in Outlook or Gmail to trick your eyes.</div>
+                  <div style="color: #10b981;"><strong style="display:block;">urgent-alert (Mailbox)</strong> Psychological urgency keyword in the username.</div>
+                  <div style="color: #fbbf24;"><strong style="display:block;">paypa1 (Fake Domain)</strong> Substitutes letter 'l' with number '1' to mimic PayPal.</div>
+                  <div style="color: #f87171;"><strong style="display:block;">.com (Top-Level Domain)</strong> The actual domain registered by the attacker.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Security Myths -->
+            <div style="margin-bottom: 28px;">
+              <h4 style="font-size:0.95rem; color:#f59e0b; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">2. Critical Email Security Myths Debunked</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-md); padding: 16px;">
+                  <div style="font-weight: 700; color: #ef4444; margin-bottom: 6px; display:flex; align-items:center; gap:8px;">
+                    <span>✉️ Myth 1:</span> "The sender name says Apple Support, so it must be Apple."
+                  </div>
+                  <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin:0;">
+                    <strong>Reality:</strong> The <strong>Display Name is purely cosmetic</strong>. Anyone can configure their email client to display "Google Security", "SBI Bank", or "Police Cyber Cell" while sending from a completely unrelated domain like `random_user@xyz-mail.com`.
+                  </p>
+                </div>
+                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-md); padding: 16px;">
+                  <div style="font-weight: 700; color: #f59e0b; margin-bottom: 6px; display:flex; align-items:center; gap:8px;">
+                    <span>📥 Myth 2:</span> "It landed in my Primary Inbox, so it must be verified safe."
+                  </div>
+                  <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin:0;">
+                    <strong>Reality:</strong> Scammers frequently use freshly registered domains with clean IP histories or compromise legitimate small business email accounts to bypass initial spam filters. Inbox delivery is never proof of security.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 Heuristic Pillars Grid -->
+            <div style="margin-bottom: 28px;">
+              <h4 style="font-size:0.95rem; color:var(--cyan); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">3. The 5 Heuristic Pillars Inspected by CyberShield</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">1. Domain Typosquatting Swaps</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Swapping characters: <code>paypa1.com</code>, <code>arnazon.com</code>, <code>micros0ft.com</code>.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> Check the exact spelling after the <code>@</code> symbol.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">2. Disposable / Burner Mailboxes</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Free throwaway inboxes: <code>mailinator.com</code>, <code>10minutemail</code>, <code>tempmail</code>.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> Reputable institutions never communicate from anonymous burner domains.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">3. Subdomain Stacking in Mail</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Pretending to be Amazon: <code>billing@amazon.orders-verification.com</code>.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> The real domain is <code>orders-verification.com</code>, NOT <code>amazon.com</code>.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">4. Public Free Mail for Corporate Claims</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Official bank or police claiming from <code>sbi_official_helpdesk@gmail.com</code>.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> Banks never use free consumer webmail (Gmail, Yahoo) for notices.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">5. RFC 5322 Syntax Compliance</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Detecting illegal characters, malformed headers, and missing TLD suffixes.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> Enforces standard Internet message formatting rules.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4-Step Checklist -->
+            <div>
+              <h4 style="font-size:0.95rem; color:#10b981; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">4. Four-Step Email Authentication Checklist</h4>
+              <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-md); padding: 16px;">
+                <ol style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: #e2e8f0; display:flex; flex-direction:column; gap:6px;">
+                  <li><strong>Always expand the sender details:</strong> Click the down arrow next to the sender to see the real email between <code>&lt; &gt;</code>.</li>
+                  <li><strong>Check the domain after the @:</strong> Look for transposed characters (<code>rn</code> vs <code>m</code>) and unusual extensions (<code>.xyz</code>, <code>.top</code>).</li>
+                  <li><strong>Never trust free webmail for organizations:</strong> If a job offer or bank notice comes from <code>@gmail.com</code> or <code>@yahoo.com</code>, treat it as fraudulent.</li>
+                  <li><strong>Never download unsolicited attachments:</strong> Files with extensions like <code>.html</code>, <code>.iso</code>, <code>.zip</code>, or <code>.vbs</code> often deliver malware payloads.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/email-checker.js"></script>
+</body>
+</html>

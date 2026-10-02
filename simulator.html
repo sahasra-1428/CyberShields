@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Threat Simulator &amp; Phishing Sandbox | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .sandbox-tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sandbox-tab-btn {
+      background: rgba(12, 20, 36, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .sandbox-tab-btn:hover {
+      border-color: var(--cyan);
+      color: #fff;
+    }
+    .sandbox-tab-btn.active {
+      border-color: var(--cyan);
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+    .browser-frame {
+      background: #090e1a;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .browser-chrome-bar {
+      background: #050811;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .window-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .browser-url-bar {
+      flex: 1;
+      background: #0f172a;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #cbd5e1;
+    }
+    .mock-site-canvas {
+      padding: 32px;
+      min-height: 420px;
+      background: #0c1427;
+      position: relative;
+    }
+    .red-flag-hotspot {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      border-radius: 4px;
+      outline: 2px dashed #f59e0b;
+      animation: pulseAlert 2s infinite ease-in-out;
+    }
+    @keyframes pulseAlert {
+      0%, 100% { outline-color: rgba(245, 158, 11, 0.4); }
+      50% { outline-color: rgba(239, 68, 68, 0.9); }
+    }
+    .red-flag-tag {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+    .forensic-breakdown-panel {
+      background: rgba(9, 14, 26, 0.9);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin-bottom: 32px;
+    }
+    .finding-card {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--cyan);
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      border-radius: 0 6px 6px 0;
+    }
+    .finding-card.danger {
+      border-left-color: #ef4444;
+      background: rgba(239, 68, 68, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+
+        <div class="nav-section-title">Detection Engines</div>
+        <a href="url-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          URL Scanner
+        </a>
+        <a href="scam-detector.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Scam Detector
+        </a>
+        <a href="email-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Checker
+        </a>
+        <a href="phone-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone Checker
+        </a>
+        <a href="qr-scanner.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          QR Scanner
+        </a>
+
+        <div class="nav-section-title">Emergency &amp; Defense Lab</div>
+        <a href="emergency-playbook.html" class="sidebar-link" style="color:#ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+          Emergency Playbook 🚨
+        </a>
+        <a href="simulator.html" class="sidebar-link active" style="color:var(--cyan); font-weight:700;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+          Phishing Simulator 🧪
+        </a>
+        <a href="report.html" class="sidebar-link" style="color: #f87171;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Report to Cyber Agents 🚨
+        </a>
+        <a href="awareness.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Awareness Hub
+        </a>
+        <a href="quiz.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          Cyber Crime Quiz
+        </a>
+        <a href="scan-history.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Scan History
+        </a>
+        <a href="security-score.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Security Score
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Interactive Threat Simulator &amp; Phishing Sandbox</h2>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <div style="max-width: 960px; margin: 0 auto;">
+
+          <!-- Intro Banner -->
+          <div class="scanner-intro">
+            <h2>🧪 Safe Forensic Sandbox: Spot Deception Traps in Real Time</h2>
+            <p>
+              Inspect simulated phishing attack vectors safely isolated from the web. Click any highlighted <strong>Red Flag Hotspot (⚠️)</strong> on the simulated interface to reveal the anatomical deception trick used by cybercriminals.
+            </p>
+          </div>
+
+          <!-- Scenario Tabs -->
+          <div class="sandbox-tabs">
+            <button class="sandbox-tab-btn active" data-vector="banking-spoof">
+              <span>🏦</span> Fake Bank KYC Portal
+            </button>
+            <button class="sandbox-tab-btn" data-vector="electricity-apk">
+              <span>⚡</span> Electricity Disconnection APK
+            </button>
+            <button class="sandbox-tab-btn" data-vector="crypto-job">
+              <span>💼</span> Telegram "Like Task" Job Scam
+            </button>
+            <button class="sandbox-tab-btn" data-vector="digital-arrest">
+              <span>⚖️</span> Fake CBI Arrest Warrant Notice
+            </button>
+          </div>
+
+          <!-- Simulated Browser Sandbox Frame -->
+          <div class="browser-frame">
+            <div class="browser-chrome-bar">
+              <div class="window-dots">
+                <div class="window-dot dot-red"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+              </div>
+              <div class="browser-url-bar" id="sandbox-url-bar">
+                <!-- Populated dynamically -->
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btn-toggle-hints" style="padding:4px 10px; font-size:0.75rem;">
+                Toggle All Red Flags
+              </button>
+            </div>
+
+            <!-- Simulated Web Interface Canvas -->
+            <div class="mock-site-canvas" id="sandbox-canvas">
+              <!-- Rendered via JavaScript -->
+            </div>
+          </div>
+
+          <!-- Forensic Breakdown of the Selected Vector -->
+          <div class="forensic-breakdown-panel">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px; flex-wrap:wrap; gap:8px;">
+              <h3 style="font-size:1.15rem; font-weight:700; color:#fff;" id="forensic-title">Forensic Threat Anatomy</h3>
+              <span class="badge-risk high-risk" id="forensic-severity">CRITICAL SEVERITY</span>
+            </div>
+            <div id="forensic-findings-container">
+              <!-- Rendered via JavaScript -->
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/simulator.js"></script>
+</body>
+</html>

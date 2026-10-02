@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Crime Readiness Quiz | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/scanner.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* Specialized Quiz Component Styles */
+    .quiz-card {
+      background: rgba(13, 21, 38, 0.9);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .quiz-progress-bar-bg {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 16px 0 24px;
+    }
+
+    .quiz-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0ea5e9, var(--cyan));
+      border-radius: 99px;
+      transition: width 0.4s ease;
+      width: 10%;
+    }
+
+    .scenario-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid var(--cyan);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #f8fafc;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .quiz-option-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .quiz-option-card:hover:not(.locked) {
+      border-color: var(--cyan);
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateX(4px);
+    }
+
+    .quiz-option-card.selected {
+      border-color: var(--cyan);
+      background: rgba(6, 182, 212, 0.15);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+    }
+
+    .quiz-option-card.correct {
+      border-color: #10b981 !important;
+      background: rgba(16, 185, 129, 0.15) !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .quiz-option-card.incorrect {
+      border-color: #ef4444 !important;
+      background: rgba(239, 68, 68, 0.15) !important;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .option-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      flex-shrink: 0;
+    }
+
+    .quiz-option-card.selected .option-letter {
+      background: var(--cyan);
+      color: #060c1a;
+    }
+
+    .quiz-option-card.correct .option-letter {
+      background: #10b981;
+      color: #fff;
+    }
+
+    .quiz-option-card.incorrect .option-letter {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    .option-text {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.45;
+    }
+
+    .explanation-card {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      line-height: 1.55;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .explanation-card.correct {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #a7f3d0;
+    }
+
+    .explanation-card.incorrect {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .score-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--cyan);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      background: rgba(6, 12, 26, 0.8);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+
+        <div class="nav-section-title">Detection Engines</div>
+        <a href="url-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          URL Scanner
+        </a>
+        <a href="scam-detector.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Scam Detector
+        </a>
+        <a href="email-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Checker
+        </a>
+        <a href="phone-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone Checker
+        </a>
+        <a href="qr-scanner.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          QR Scanner
+        </a>
+
+        <div class="nav-section-title">Personal Security</div>
+        <a href="scan-history.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Scan History
+        </a>
+        <a href="security-score.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Security Score
+        </a>
+        <a href="awareness.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Awareness Hub
+        </a>
+        <a href="quiz.html" class="sidebar-link active">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          Cyber Crime Quiz
+        </a>
+        <a href="emergency-playbook.html" class="sidebar-link" style="color:#ef4444; font-weight:700;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+          Emergency Playbook 🚨
+        </a>
+        <a href="simulator.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+          Threat Simulator 🧪
+        </a>
+        <a href="report.html" class="sidebar-link" style="color: #f87171;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Report to Cyber Agents 🚨
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Cyber Crime Readiness Assessment</h2>
+        </div>
+        <div class="topbar-right">
+          <a href="awareness.html" class="btn btn-outline btn-sm">Awareness Hub</a>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <div style="max-width: 820px; margin: 0 auto;">
+
+          <!-- QUIZ PLAY VIEW -->
+          <div id="quiz-play-view" class="quiz-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span id="quiz-category-tag" class="badge-risk low-risk">Phishing URLs</span>
+              <span id="quiz-step-counter" style="font-size:0.85rem; color:var(--text-muted); font-weight:700;">Question 1 of 10</span>
+            </div>
+
+            <div class="quiz-progress-bar-bg">
+              <div class="quiz-progress-bar-fill" id="quiz-progress-bar" style="width: 10%;"></div>
+            </div>
+
+            <h3 style="font-size:1.15rem; color:var(--cyan); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em;">Incident Scenario</h3>
+            <div class="scenario-box" id="quiz-scenario-text">
+              Loading scenario questions...
+            </div>
+
+            <h4 style="font-size:0.9rem; color:#94a3b8; margin-bottom:12px; text-transform:uppercase;">Select Best Response:</h4>
+            <div class="options-grid" id="quiz-options-container">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Instant Feedback Section -->
+            <div class="explanation-card" id="quiz-explanation-box">
+              <div id="quiz-feedback-title" style="font-weight:700; margin-bottom:6px; font-size:1rem;"></div>
+              <div id="quiz-feedback-text"></div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px;">
+              <span style="font-size:0.82rem; color:var(--text-muted);">Real-world cybersecurity attack simulation</span>
+              <button type="button" id="btn-submit-answer" class="btn btn-primary" disabled>
+                Confirm Choice
+              </button>
+              <button type="button" id="btn-next-question" class="btn btn-primary" style="display:none;">
+                Continue to Next Scenario →
+              </button>
+            </div>
+          </div>
+
+          <!-- QUIZ RESULTS VIEW (Hidden initially) -->
+          <div id="quiz-results-view" class="quiz-card" style="display:none; text-align:center;">
+            <div class="score-circle">
+              <span id="res-score-num" style="font-size:2.8rem; font-weight:900; line-height:1; color:#fff;">--</span>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--cyan); font-weight:700; margin-top:4px;">Score / 10</span>
+            </div>
+
+            <h2 id="res-badge-title" style="font-size:1.8rem; margin-bottom:8px; color:var(--cyan);">Calculating Resilience...</h2>
+            <p id="res-summary-text" style="color:var(--text-secondary); max-width:540px; margin:0 auto 24px; font-size:0.95rem;">
+              Assessment complete. Review your attack scenario defenses below:
+            </p>
+
+            <div style="display:flex; justify-content:center; gap:12px; margin-bottom:32px;">
+              <button type="button" id="btn-retake-quiz" class="btn btn-outline btn-sm">Retake Assessment</button>
+              <a href="awareness.html" class="btn btn-secondary btn-sm">Review Awareness Hub</a>
+              <a href="user-dashboard.html" class="btn btn-primary btn-sm">Go to Dashboard</a>
+            </div>
+
+            <!-- Detailed Question Breakdown -->
+            <div style="text-align:left; border-top:1px solid rgba(255,255,255,0.08); padding-top:24px;">
+              <h3 style="font-size:1.2rem; margin-bottom:16px; color:#fff;">Incident Breakdown &amp; Analysis</h3>
+              <div id="quiz-review-list" style="display:flex; flex-direction:column; gap:14px;">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

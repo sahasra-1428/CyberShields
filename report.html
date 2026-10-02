@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report to Cyber Agents | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .emergency-banner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .emergency-card {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .emergency-card:hover {
+      transform: translateY(-2px);
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.14);
+    }
+    .emergency-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .emergency-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #f87171;
+      letter-spacing: 0.05em;
+    }
+    .emergency-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .emergency-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .tracker-card {
+      background: rgba(6, 12, 26, 0.85);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .tracker-input-group {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      min-width: 260px;
+    }
+    .urgency-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .urgency-critical { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.5); }
+    .urgency-high { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.5); }
+    .urgency-medium { background: rgba(234, 179, 8, 0.2); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.5); }
+    .urgency-low { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); }
+    .docket-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .docket-modal.active { display: flex; }
+    .docket-card {
+      background: #090f1e;
+      border: 1px solid rgba(0, 229, 255, 0.4);
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.25);
+      border-radius: var(--radius-lg);
+      max-width: 620px;
+      width: 100%;
+      padding: 32px;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+
+        <div class="nav-section-title">Detection Engines</div>
+        <a href="url-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          URL Scanner
+        </a>
+        <a href="scam-detector.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Scam Detector
+        </a>
+        <a href="email-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Checker
+        </a>
+        <a href="phone-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone Checker
+        </a>
+        <a href="qr-scanner.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          QR Scanner
+        </a>
+
+        <div class="nav-section-title">Cyber Defense &amp; Incident Desk</div>
+        <a href="report.html" class="sidebar-link active" style="color: #f87171;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Report to Cyber Agents 🚨
+        </a>
+        <a href="scan-history.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Scan History
+        </a>
+        <a href="security-score.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Security Score
+        </a>
+        <a href="awareness.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Awareness Hub
+        </a>
+        <a href="quiz.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+          Readiness Quiz 🎯
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Cyber Crime Incident &amp; Agent Dispatch Desk</h2>
+        </div>
+        <div class="topbar-right">
+          <a href="tel:1930" class="btn btn-danger btn-sm" style="font-weight:700;">
+            📞 Emergency: Dial 1930
+          </a>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <div style="max-width: 960px; margin: 0 auto;">
+          
+          <!-- Introduction -->
+          <div class="scanner-intro">
+            <h2>🚨 Dispatch Incident Report to Cyber Crime Agents</h2>
+            <p>
+              Direct emergency escalation desk connecting citizens with certified Cyber Crime Investigation Agents, the 
+              <strong>National Cyber Crime Reporting Portal (I4C / Dial 1930)</strong>, and <strong>CERT-In</strong>.
+              All submissions generate an official tracking docket with evidence logs.
+            </p>
+          </div>
+
+          <!-- Emergency Hotlines Directory -->
+          <div class="emergency-banner">
+            <a href="tel:1930" class="emergency-card">
+              <div class="emergency-icon">📞</div>
+              <div>
+                <div class="emergency-title">National Cyber Helpline</div>
+                <div class="emergency-value">Dial 1930</div>
+                <div class="emergency-sub">Golden Hour Financial Account Freezing</div>
+              </div>
+            </a>
+            <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="emergency-card">
+              <div class="emergency-icon">🏛️</div>
+              <div>
+                <div class="emergency-title">National Cybercrime Portal</div>
+                <div class="emergency-value">cybercrime.gov.in</div>
+                <div class="emergency-sub">Ministry of Home Affairs (I4C)</div>
+              </div>
+            </a>
+            <a href="mailto:incident@cert-in.org.in" class="emergency-card">
+              <div class="emergency-icon">🛡️</div>
+              <div>
+                <div class="emergency-title">CERT-In Emergency Unit</div>
+                <div class="emergency-value">1800-11-4949</div>
+                <div class="emergency-sub">incident@cert-in.org.in</div>
+              </div>
+            </a>
+            <a href="https://sancharsaathi.gov.in" target="_blank" rel="noopener noreferrer" class="emergency-card">
+              <div class="emergency-icon">📱</div>
+              <div>
+                <div class="emergency-title">Telecom Fraud (Chakshu)</div>
+                <div class="emergency-value">Sanchar Saathi</div>
+                <div class="emergency-sub">Spam SIM &amp; SMS Blacklisting</div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Live Docket Tracker Search Card -->
+          <div class="tracker-card">
+            <div>
+              <div style="font-size:0.85rem; text-transform:uppercase; color:var(--cyan); font-weight:700; letter-spacing:0.05em;">
+                Docket Verification Desk
+              </div>
+              <div style="font-size:1.05rem; font-weight:700; color:#fff; margin-top:2px;">
+                Track an Active Cyber Agent Docket
+              </div>
+            </div>
+            <div class="tracker-input-group">
+              <input type="text" class="form-input" id="track-docket-input" placeholder="e.g. CAD-2026-482910" style="margin-bottom:0; font-family:var(--font-mono); text-transform:uppercase;">
+              <button class="btn btn-secondary" id="btn-track-docket" style="white-space:nowrap;">Track Docket</button>
+            </div>
+          </div>
+
+          <!-- Main Incident Report Dispatch Form -->
+          <div class="card" style="margin-bottom: 32px; border: 1px solid rgba(0, 229, 255, 0.25);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:14px;">
+              <div>
+                <h3 style="font-size:1.2rem; font-weight:700; color:#fff; display:flex; align-items:center; gap:8px;">
+                  <span>📋</span> Cyber Crime Agent Incident Dispatch Form
+                </h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-top:4px;">
+                  All submissions are automatically routed to the designated Cyber Defense Wing.
+                </p>
+              </div>
+              <span class="badge-risk high-risk" style="font-size:0.75rem;">LIVE DISPATCH DESK</span>
+            </div>
+
+            <form id="report-form">
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 18px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Incident Category *</label>
+                  <select class="form-input" id="report-category" required>
+                    <option value="url">Malicious URL / Phishing Website</option>
+                    <option value="phone">Scam Phone Call / Wangiri Fraud</option>
+                    <option value="message">SMS / Smishing / WhatsApp Trap</option>
+                    <option value="email">Phishing Email / Fake Invoice</option>
+                    <option value="social_media">Social Media Impersonation / Digital Arrest</option>
+                    <option value="other">Banking / UPI Cyber Fraud</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Target Entity (URL, Phone, Email, UPI) *</label>
+                  <input type="text" class="form-input" id="report-target" placeholder="e.g. https://sbi-fake-kyc.xyz or +91 9876543210" required>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 18px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Assign To Cyber Agent Unit</label>
+                  <select class="form-input" id="report-unit">
+                    <option value="National Cyber Crime Bureau (I4C / 1930) - Financial Fraud &amp; Bank Freezing">National Cyber Crime Bureau (I4C / 1930) - Financial Fraud &amp; Bank Freezing</option>
+                    <option value="Central Phishing Takedown &amp; Domain Suspension Taskforce">Central Phishing Takedown &amp; Domain Suspension Taskforce</option>
+                    <option value="CERT-In Incident Response &amp; Malware Analysis Unit">CERT-In Incident Response &amp; Malware Analysis Unit</option>
+                    <option value="Telecom Cyber Crime &amp; Anti-Smishing Wing (Sanchar Saathi)">Telecom Cyber Crime &amp; Anti-Smishing Wing (Sanchar Saathi)</option>
+                    <option value="Social Engineering &amp; Identity Theft Investigation Wing">Social Engineering &amp; Identity Theft Investigation Wing</option>
+                    <option value="State Police Cyber Crime Cell">State Police Cyber Crime Cell</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Incident Urgency Level *</label>
+                  <select class="form-input" id="report-urgency" required>
+                    <option value="HIGH">HIGH (Active Phishing Link / Credentials Compromised)</option>
+                    <option value="CRITICAL">CRITICAL (Financial Loss Occurred / Active Extortion - Dial 1930)</option>
+                    <option value="MEDIUM">MEDIUM (Suspicious Unsolicited Message / Attempted Fraud)</option>
+                    <option value="LOW">LOW (Threat Intelligence / Inactive Scam Vector)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Suspect Financial & Contact Telemetry -->
+              <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 16px; margin-bottom: 18px;">
+                <div style="font-size:0.85rem; font-weight:700; color:var(--cyan); margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+                  <span>🔍</span> Suspect Financial &amp; Telecom Telemetry (Optional)
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+                  <div>
+                    <label class="form-label" style="font-size:0.75rem;">Suspect UPI ID / VPA</label>
+                    <input type="text" class="form-input" id="report-upi" placeholder="e.g. fraudster@ybl" style="margin-bottom:0;">
+                  </div>
+                  <div>
+                    <label class="form-label" style="font-size:0.75rem;">Suspect Mobile Number</label>
+                    <input type="text" class="form-input" id="report-suspect-phone" placeholder="e.g. +91 9812345678" style="margin-bottom:0;">
+                  </div>
+                  <div>
+                    <label class="form-label" style="font-size:0.75rem;">Financial Loss Incurred (₹)</label>
+                    <input type="number" step="any" min="0" class="form-input" id="report-loss" placeholder="0.00" style="margin-bottom:0;">
+                  </div>
+                </div>
+                <div id="loss-warning" style="display:none; margin-top:12px; padding:10px 14px; background:rgba(239, 68, 68, 0.15); border:1px solid #ef4444; border-radius:4px; font-size:0.8rem; color:#fca5a5;">
+                  ⚠️ <strong>CRITICAL FINANCIAL ALERT:</strong> If funds were debited, immediately dial <strong>1930</strong> (Golden Hour protocol) so banks can freeze the fraudulent transaction before it leaves the banking network!
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Action Requested from Cyber Agents *</label>
+                <select class="form-input" id="report-action" required>
+                  <option value="Domain / SIM Takedown &amp; Evidence Forensics">Domain / SIM Takedown &amp; Evidence Forensics</option>
+                  <option value="Emergency Bank Account &amp; Mule Wallet Freezing">Emergency Bank Account &amp; Mule Wallet Freezing</option>
+                  <option value="Malicious Sender ID &amp; Telecom Blacklisting">Malicious Sender ID &amp; Telecom Blacklisting</option>
+                  <option value="Digital Evidence Preservation &amp; Criminal FIR Filing">Digital Evidence Preservation &amp; Criminal FIR Filing</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Incident Narrative &amp; Modus Operandi *</label>
+                <textarea class="form-input" id="report-description" rows="4" placeholder="Detail how the fraudster contacted you, what claims were made (e.g. electricity cutoff, lottery prize, CBI digital arrest), and what was demanded..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Digital Evidence / SMS Text / Payment UTR / Headers (Optional)</label>
+                <textarea class="form-input" id="report-evidence" rows="3" placeholder="Paste full chat transcripts, bank transaction UTR numbers, raw email headers, or payment gateway receipts..."></textarea>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <div style="font-size:0.8rem; color:var(--text-muted);">
+                  🔒 Dispatched with end-to-end audit logging to Cyber Operations.
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-submit-report" style="background:#dc2626; border-color:#ef4444;">
+                  🚨 Dispatch Incident to Cyber Agents
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- User's Dispatched Reports Table -->
+          <div class="table-card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+              <h3 style="font-size:1.15rem; font-weight:700;">Your Dispatched Cyber Agent Dockets</h3>
+              <span style="font-size:0.8rem; color:var(--text-muted);">Real-time Triage Feed</span>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th>Docket #</th>
+                    <th>Assigned Cyber Agent</th>
+                    <th>Target Entity</th>
+                    <th>Urgency</th>
+                    <th>Triage Status</th>
+                    <th>Dispatched</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="user-reports-tbody">
+                  <tr>
+                    <td colspan="7" style="text-align:center; padding:24px; color:var(--text-muted);">
+                      Loading dispatched cyber agent dockets...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Docket Modal Dialog -->
+  <div class="docket-modal" id="docket-modal">
+    <div class="docket-card">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px;">
+        <div>
+          <span style="font-size:0.75rem; text-transform:uppercase; color:var(--cyan); font-weight:700; letter-spacing:0.08em;">Official Incident Docket</span>
+          <h3 style="font-size:1.35rem; color:#fff; margin-top:2px; font-family:var(--font-mono);" id="modal-docket-id">CAD-2026-000000</h3>
+        </div>
+        <button id="btn-close-docket-modal" style="background:transparent; border:none; color:var(--text-muted); font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+
+      <div style="margin-bottom:18px; padding:14px; background:rgba(0, 229, 255, 0.05); border:1px solid rgba(0, 229, 255, 0.2); border-radius:var(--radius-md);">
+        <div style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">On-Duty Assigned Cyber Agent</div>
+        <div style="font-size:1.05rem; font-weight:800; color:#38bdf8; margin-top:3px;" id="modal-assigned-agent">Officer Investigating</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;" id="modal-agent-unit">Cyber Defense Wing</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:18px; font-size:0.85rem;">
+        <div>
+          <span style="color:var(--text-muted);">Target Entity:</span>
+          <div style="font-weight:700; color:#fff; word-break:break-all;" id="modal-target">-</div>
+        </div>
+        <div>
+          <span style="color:var(--text-muted);">Triage Status:</span>
+          <div id="modal-status"><span class="badge-risk low-risk">Submitted</span></div>
+        </div>
+        <div>
+          <span style="color:var(--text-muted);">Requested Enforcement:</span>
+          <div style="font-weight:600; color:#cbd5e1;" id="modal-action">-</div>
+        </div>
+        <div>
+          <span style="color:var(--text-muted);">Dispatched On:</span>
+          <div style="font-weight:600; color:#cbd5e1;" id="modal-created">-</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(239, 68, 68, 0.08); border:1px solid rgba(239, 68, 68, 0.3); border-radius:var(--radius-md); padding:12px; margin-bottom:20px;">
+        <div style="font-size:0.78rem; font-weight:700; color:#f87171; text-transform:uppercase;">Immediate Safety Advisory</div>
+        <div style="font-size:0.8rem; color:#fca5a5; margin-top:4px;" id="modal-advisory">
+          Evidence dispatched to cyber operations. If monetary loss occurred, dial 1930 immediately to freeze beneficiary bank accounts.
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" id="btn-print-docket">🖨️ Export Official Dossier (Print / PDF)</button>
+        <button class="btn btn-secondary btn-sm" id="btn-copy-docket">Copy Docket #</button>
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('docket-modal').classList.remove('active')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/report.js"></script>
+</body>
+</html>

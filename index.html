@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CYBERSHIELD | Cyber Scam Protection & Detection Platform</title>
+  <meta name="description" content="AI & heuristic cyber scam detection platform. Analyze suspicious URLs, messages, emails, phone numbers, and QR codes with explainable cybersecurity reasoning.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <svg class="shield-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      CYBERSHIELD
+      <span class="brand-badge">PRO</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="awareness.html">Awareness</a></li>
+      <li><a href="quiz.html">Cyber Quiz</a></li>
+      <li><a href="simulator.html">Threat Simulator</a></li>
+      <li><a href="emergency-playbook.html" style="color:#ef4444; font-weight:700;">🚨 Emergency Playbook</a></li>
+      <li><a href="report.html" style="color:#f87171; font-weight:700;">Report to Cyber Agents</a></li>
+    </ul>
+
+    <div class="nav-cta" id="navbar-auth-action">
+      <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+      <a href="signup.html" class="btn btn-primary btn-sm">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-tag">
+      <span>🛡️ Next-Gen Threat Detection Platform</span>
+    </div>
+    <h1 class="hero-title">Stay One Step Ahead of Cyber Scams</h1>
+    <p class="hero-subtitle">
+      Analyze suspicious links, messages, emails, phone numbers and QR codes before they put your personal information at risk.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="url-checker.html" class="btn btn-primary btn-lg">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Scan a URL
+      </a>
+      <a href="#features" class="btn btn-outline btn-lg">Explore Protection</a>
+    </div>
+
+    <!-- Shield Visual Graphic -->
+    <div class="shield-visual-container">
+      <div class="cyber-shield-graphic">
+        <svg class="shield-outer" viewBox="0 0 100 120">
+          <path d="M50 5 L88 20 L88 65 C88 95 50 115 50 115 C50 115 12 95 12 65 L12 20 Z" />
+          <path d="M50 20 L76 32 L76 65 C76 86 50 100 50 100 C50 100 24 86 24 65 L24 32 Z" stroke="rgba(14,165,233,0.6)" stroke-width="1.5" fill="none" />
+          <circle cx="50" cy="58" r="14" stroke="#06b6d4" stroke-width="2" fill="rgba(6,182,212,0.15)" />
+          <path d="M44 58 L48 62 L56 54" stroke="#00f2fe" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="section-header">
+      <h2 class="section-title">Comprehensive Multi-Vector Defense</h2>
+      <p class="section-subtitle">
+        Cyber criminals attack across multiple channels. CyberShield provides specialized detection modules for every threat vector.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card">
+        <div class="feature-icon-box">🌐</div>
+        <h3 class="feature-title">URL Protection</h3>
+        <p class="feature-desc">
+          Detects homograph punycode spoofing, IP addresses, disguised shorteners, suspicious TLDs, and credential harvesting landing pages.
+        </p>
+        <div style="margin-top: 18px;">
+          <a href="url-checker.html" style="font-size:0.88rem; font-weight:600; color:var(--cyan-accent);">Scan URL &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card">
+        <div class="feature-icon-box">💬</div>
+        <h3 class="feature-title">Message Detection</h3>
+        <p class="feature-desc">
+          Analyzes SMS, WhatsApp, and Telegram texts for fear tactics, fake lotteries, digital arrest threats, and unauthorized OTP requests.
+        </p>
+        <div style="margin-top: 18px;">
+          <a href="scam-detector.html" style="font-size:0.88rem; font-weight:600; color:var(--cyan-accent);">Analyze Message &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card">
+        <div class="feature-icon-box">✉️</div>
+        <h3 class="feature-title">Email Security</h3>
+        <p class="feature-desc">
+          Identifies look-alike corporate domains, disposable inboxes, typosquatting characters, and spoofed bank sender addresses.
+        </p>
+        <div style="margin-top: 18px;">
+          <a href="email-checker.html" style="font-size:0.88rem; font-weight:600; color:var(--cyan-accent);">Verify Email &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card">
+        <div class="feature-icon-box">📞</div>
+        <h3 class="feature-title">Phone Verification</h3>
+        <p class="feature-desc">
+          Cross-references caller numbers with citizen fraud incident reports, international Wangiri callbacks, and VoIP patterns.
+        </p>
+        <div style="margin-top: 18px;">
+          <a href="phone-checker.html" style="font-size:0.88rem; font-weight:600; color:var(--cyan-accent);">Check Phone Number &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card">
+        <div class="feature-icon-box">📷</div>
+        <h3 class="feature-title">QR Security</h3>
+        <p class="feature-desc">
+          Prevents quishing attacks by safely decoding QR codes, inspecting deceptive UPI payment traps and malicious download targets.
+        </p>
+        <div style="margin-top: 18px;">
+          <a href="qr-scanner.html" style="font-size:0.88rem; font-weight:600; color:var(--cyan-accent);">Inspect QR Code &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="feature-card" style="border: 1px solid rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.05);">
+        <div class="feature-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">🚨</div>
+        <h3 class="feature-title">Report to Cyber Agents</h3>
+        <p class="feature-desc">
+          Direct incident dispatch desk connecting citizens to certified Cyber Investigation Agents, the National Cyber Crime Reporting Portal (1930 / I4C), and CERT-In.
+        </p>
+        <div style="margin-top: 18px;">
+          <a href="report.html" style="font-size:0.88rem; font-weight:700; color:#f87171;">Dispatch Incident to Agents &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section" id="how-it-works" style="background: rgba(12, 20, 36, 0.4); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="section-header">
+      <h2 class="section-title">How CyberShield Protects You</h2>
+      <p class="section-subtitle">
+        Transparent, multi-layered risk assessment designed to educate and protect, not just give opaque one-word verdicts.
+      </p>
+    </div>
+
+    <div class="steps-container">
+      <div class="step-box">
+        <span class="step-number">STEP 1</span>
+        <h4>Submit Content</h4>
+        <p>Submit a suspicious link, message text, email, phone number or QR code image.</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-number">STEP 2</span>
+        <h4>Normalization</h4>
+        <p>CyberShield parses, cleans, normalizes and extracts entities without opening unsafe links.</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-number">STEP 3</span>
+        <h4>Indicator Analysis</h4>
+        <p>Multiple security indicators (keywords, TLDs, IP patterns, threat intel) are evaluated.</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-number">STEP 4</span>
+        <h4>Score Calculation</h4>
+        <p>Transparent risk score is computed based on weighted indicators, never random guessing.</p>
+      </div>
+
+      <div class="step-box">
+        <span class="step-number">STEP 5</span>
+        <h4>Actionable Defense</h4>
+        <p>You receive an explainable breakdown: What was found, Why, and exact steps to stay safe.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why CyberShield Section -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Why CyberShield?</h2>
+      <p class="section-subtitle">
+        Built from the ground up to solve the flaws of conventional demo tools and simplistic safety checkers.
+      </p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">🔍</div>
+        <div>
+          <h4 style="margin-bottom: 4px;">Explainable Results</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary);">We never say "SAFE" or "FAKE" without rationale. We explain WHAT was found and WHY.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">🗄️</div>
+        <div>
+          <h4 style="margin-bottom: 4px;">Real Database</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary);">Connected directly to MySQL for authentic scan histories, reports, and administrative triage.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">📜</div>
+        <div>
+          <h4 style="margin-bottom: 4px;">Security History</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary);">Track every scan you run, monitor recurring scam targets, and maintain an audit trail.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">⚡</div>
+        <div>
+          <h4 style="margin-bottom: 4px;">Multiple Scanners</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary);">Unified protection across URLs, SMS, emails, phone numbers, and QR quishing vectors.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">🎓</div>
+        <div>
+          <h4 style="margin-bottom: 4px;">Awareness Education</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary);">Interactive modules covering 10 major scam genres to build long-term digital resilience.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">🔒</div>
+        <div>
+          <h4 style="margin-bottom: 4px;">Secure Authentication</h4>
+          <p style="font-size:0.88rem; color:var(--text-secondary);">Bcrypt password hashing and JWT sessions ensure your security history remains private.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div style="font-size: 1.1rem; font-weight: 700; color: #fff;">
+        CYBERSHIELD &bull; Cyber Scam Protection & Detection Platform
+      </div>
+      <p>
+        Designed for academic presentation, professional portfolios, and real-world cybersecurity experimentation.
+      </p>
+      <div style="display:flex; justify-content:center; gap:20px; font-size:0.88rem;">
+        <a href="awareness.html">Awareness Hub</a>
+        <a href="report.html">Report Scam</a>
+        <a href="url-checker.html">URL Scanner</a>
+        <a href="scam-detector.html">Message Detector</a>
+      </div>
+      <div style="margin-top: 10px; font-size: 0.8rem; color: #475569;">
+        &copy; 2026 CYBERSHIELD. All rights reserved. Powered by Node.js & MySQL.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

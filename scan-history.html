@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan History | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+
+        <div class="nav-section-title">Detection Engines</div>
+        <a href="url-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          URL Scanner
+        </a>
+        <a href="scam-detector.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Scam Detector
+        </a>
+        <a href="email-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Checker
+        </a>
+        <a href="phone-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone Checker
+        </a>
+        <a href="qr-scanner.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          QR Scanner
+        </a>
+
+        <div class="nav-section-title">Personal Security</div>
+        <a href="scan-history.html" class="sidebar-link active">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Scan History
+        </a>
+        <a href="security-score.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Security Score
+        </a>
+        <a href="awareness.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Awareness Hub
+        </a>
+        <a href="report.html" class="sidebar-link" style="color: #f87171;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Report to Cyber Agents 🚨
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Personal Threat Scan History</h2>
+        </div>
+        <div class="topbar-right">
+          <a href="url-checker.html" class="btn btn-primary btn-sm">+ New Scan</a>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <!-- Filter Bar -->
+        <div class="admin-filter-bar">
+          <div>
+            <label style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; display:block; margin-bottom:4px;">Threat Vector</label>
+            <select class="admin-select" id="filter-type">
+              <option value="all">All Vectors</option>
+              <option value="url">URLs</option>
+              <option value="message">Messages</option>
+              <option value="email">Emails</option>
+              <option value="phone">Phones</option>
+              <option value="qr">QR Codes</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; display:block; margin-bottom:4px;">Risk Level</label>
+            <select class="admin-select" id="filter-risk">
+              <option value="all">All Risks</option>
+              <option value="LOW RISK">Low Risk</option>
+              <option value="SUSPICIOUS">Suspicious</option>
+              <option value="HIGH RISK">High Risk</option>
+              <option value="MALICIOUS">Malicious</option>
+              <option value="UNKNOWN / UNABLE TO VERIFY">Unknown / Unverified</option>
+            </select>
+          </div>
+
+          <div style="flex:1; min-width:200px;">
+            <label style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; display:block; margin-bottom:4px;">Search Scans</label>
+            <input type="text" class="form-input" id="filter-search" placeholder="Search target text or domain..." style="padding:7px 12px; font-size:0.88rem;">
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="table-card">
+          <table class="cyber-table">
+            <thead>
+              <tr>
+                <th>Date &amp; Time</th>
+                <th>Type</th>
+                <th>Inspected Target</th>
+                <th>Risk Classification</th>
+                <th>Score</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody">
+              <tr>
+                <td colspan="7" style="text-align:center; padding:30px; color:var(--text-muted);">
+                  Loading scan records from MySQL...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pagination-controls" id="pagination-container"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Scan Details Modal -->
+  <div class="modal-overlay" id="scan-detail-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="scan-modal-title" style="font-size:1.15rem; font-weight:700;">Security Scan Detail</h3>
+        <button class="toast-close modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="scan-modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>

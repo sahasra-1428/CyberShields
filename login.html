@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <svg class="shield-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      CYBERSHIELD
+    </a>
+    <div class="nav-cta">
+      <a href="signup.html" class="btn btn-outline btn-sm">Don't have an account? Sign up</a>
+    </div>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <svg class="shield-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Log in to access your scam detection dashboard</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <div class="input-container">
+            <input type="email" id="email" class="form-input" placeholder="name@example.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <label class="form-label" for="password" style="margin-bottom:0;">Password</label>
+            <a href="javascript:void(0)" id="open-forgot-modal" style="color:var(--cyan); font-size:0.85rem; text-decoration:none;">Forgot password?</a>
+          </div>
+          <div class="input-container">
+            <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
+            <button type="button" class="password-toggle" data-target="password">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+          Authenticate &amp; Access Dashboard
+        </button>
+      </form>
+
+      <!-- Preconfigured Test Credentials Helper -->
+      <div class="demo-credentials-box">
+        <div style="font-weight:700; color:#fff; margin-bottom:4px;">Demo &amp; Testing Access:</div>
+        <div>Admin: <strong>admin@cybershield.org</strong> / <strong>Admin@123</strong></div>
+        <div style="margin-top:2px;">User: Register a new account or use any registered email.</div>
+      </div>
+
+      <div class="auth-footer">
+        Don't have an account yet? <a href="signup.html">Create free account</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password Reset Modal -->
+  <div id="reset-modal" style="display:none; position:fixed; inset:0; background:rgba(6,12,26,0.85); backdrop-filter:blur(6px); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+    <div class="auth-card" style="max-width:440px; margin:0; border:1px solid rgba(0,229,255,0.3); box-shadow:0 12px 40px rgba(0,0,0,0.6);">
+      <div class="auth-header">
+        <h3 class="auth-title" style="font-size:1.4rem;">Reset Password</h3>
+        <p class="auth-subtitle">Set a new secure password for your registered email</p>
+      </div>
+      <form id="reset-form">
+        <div class="form-group">
+          <label class="form-label" for="reset-email">Registered Email</label>
+          <input type="email" id="reset-email" class="form-input" placeholder="name@example.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reset-new-password">New Password</label>
+          <input type="password" id="reset-new-password" class="form-input" placeholder="Min 8 chars, 1 uppercase, 1 number, 1 symbol" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reset-confirm-password">Confirm New Password</label>
+          <input type="password" id="reset-confirm-password" class="form-input" placeholder="Repeat new password" required>
+        </div>
+        <div style="display:flex; gap:12px; margin-top:20px;">
+          <button type="button" id="close-reset-modal" class="btn btn-outline" style="flex:1;">Cancel</button>
+          <button type="submit" id="submit-reset-btn" class="btn btn-primary" style="flex:1;">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

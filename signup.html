@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <svg class="shield-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      CYBERSHIELD
+    </a>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline btn-sm">Already have an account? Log in</a>
+    </div>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <svg class="shield-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-subtitle">Join CyberShield to safeguard your online identity</p>
+      </div>
+
+      <form id="signup-form">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <div class="input-container">
+            <input type="text" id="name" class="form-input" placeholder="e.g. Alex Mercer" required autocomplete="name">
+          </div>
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <div class="input-container">
+            <input type="email" id="email" class="form-input" placeholder="name@example.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone Number (Optional)</label>
+          <div class="input-container">
+            <input type="tel" id="phone" class="form-input" placeholder="+91 9876543210" autocomplete="tel">
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="signup-password">Master Password</label>
+          <div class="input-container">
+            <input type="password" id="signup-password" class="form-input" placeholder="Create a strong password" required autocomplete="new-password">
+            <button type="button" class="password-toggle" data-target="signup-password">👁️</button>
+          </div>
+
+          <!-- Real-Time Password Strength Meter -->
+          <div class="password-strength-container">
+            <div class="strength-bar-bg">
+              <div class="strength-bar-fill" id="strength-bar-fill"></div>
+            </div>
+            <div class="strength-label">
+              <span>Security Complexity:</span>
+              <strong id="strength-text" style="color:var(--text-muted);">None</strong>
+            </div>
+
+            <div class="password-requirements">
+              <div class="requirement-item invalid" id="req-len" data-label="Min 8 characters">○ Min 8 characters</div>
+              <div class="requirement-item invalid" id="req-upper" data-label="Uppercase letter">○ Uppercase letter</div>
+              <div class="requirement-item invalid" id="req-lower" data-label="Lowercase letter">○ Lowercase letter</div>
+              <div class="requirement-item invalid" id="req-num" data-label="At least one number">○ At least one number</div>
+              <div class="requirement-item invalid" id="req-special" data-label="Special symbol">○ Special symbol</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label class="form-label" for="confirm-password">Confirm Password</label>
+          <div class="input-container">
+            <input type="password" id="confirm-password" class="form-input" placeholder="Re-enter password" required autocomplete="new-password">
+            <button type="button" class="password-toggle" data-target="confirm-password">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+          Create CyberShield Account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already registered? <a href="login.html">Sign in here</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6-Box OTP Verification Modal -->
+  <div id="signup-otp-modal" class="otp-modal-overlay" style="display:none;">
+    <div class="otp-card">
+      <div class="auth-header" style="margin-bottom:16px;">
+        <svg class="shield-icon" style="width:36px; height:36px;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3 class="auth-title" style="font-size:1.35rem;">Verify Your Identity</h3>
+        <p class="auth-subtitle" style="font-size:0.88rem;">
+          We sent a 6-digit verification code to<br>
+          <strong id="otp-recipient-email" style="color:#fff;">email@domain.com</strong>
+        </p>
+      </div>
+
+      <!-- Demo Simulation Banner -->
+      <div id="otp-demo-banner" class="otp-demo-badge">
+        <span>Simulated Code: <strong id="otp-preview-code">------</strong></span>
+      </div>
+
+      <!-- 6 Individual Digit Inputs -->
+      <div class="otp-box-group" id="otp-inputs">
+        <input type="text" class="otp-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="one-time-code" autofocus>
+        <input type="text" class="otp-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+        <input type="text" class="otp-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+        <input type="text" class="otp-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+        <input type="text" class="otp-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+        <input type="text" class="otp-digit-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+      </div>
+
+      <div class="otp-timer-text">
+        Expires in <strong id="otp-countdown">05:00</strong> | 
+        <button type="button" id="btn-resend-otp" class="otp-resend-btn" disabled>Resend Code</button>
+      </div>
+
+      <div style="display:flex; gap:12px;">
+        <button type="button" id="btn-cancel-otp" class="btn btn-outline" style="flex:1;">Cancel</button>
+        <button type="button" id="btn-verify-otp" class="btn btn-primary" style="flex:1;">Verify &amp; Activate</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

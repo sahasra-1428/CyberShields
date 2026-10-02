@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Cyber Incident Playbook | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .protocol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .protocol-card {
+      background: rgba(12, 20, 36, 0.85);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .protocol-card:hover, .protocol-card.active {
+      border-color: var(--cyan);
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateY(-2px);
+    }
+    .protocol-card.active::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--cyan);
+    }
+    .protocol-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .protocol-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .playbook-steps {
+      background: rgba(9, 14, 26, 0.95);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 36px;
+    }
+    .step-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 22px;
+      align-items: flex-start;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0, 229, 255, 0.15);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .step-content h4 {
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .bank-directory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .bank-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      transition: all 0.2s ease;
+    }
+    .bank-card:hover {
+      border-color: rgba(0, 229, 255, 0.4);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .bank-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bank-tollfree {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: #38bdf8;
+      display: block;
+      margin-bottom: 6px;
+      text-decoration: none;
+    }
+    .bank-tollfree:hover {
+      text-decoration: underline;
+    }
+    .complaint-preview-box {
+      background: #040814;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+
+        <div class="nav-section-title">Detection Engines</div>
+        <a href="url-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          URL Scanner
+        </a>
+        <a href="scam-detector.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Scam Detector
+        </a>
+        <a href="email-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Checker
+        </a>
+        <a href="phone-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone Checker
+        </a>
+        <a href="qr-scanner.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          QR Scanner
+        </a>
+
+        <div class="nav-section-title">Emergency &amp; Defense Lab</div>
+        <a href="emergency-playbook.html" class="sidebar-link active" style="color:#ef4444; font-weight:700;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+          Emergency Playbook 🚨
+        </a>
+        <a href="simulator.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+          Phishing Simulator 🧪
+        </a>
+        <a href="report.html" class="sidebar-link" style="color: #f87171;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Report to Cyber Agents 🚨
+        </a>
+        <a href="awareness.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Awareness Hub
+        </a>
+        <a href="quiz.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          Cyber Crime Quiz
+        </a>
+        <a href="scan-history.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Scan History
+        </a>
+        <a href="security-score.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Security Score
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Citizen Cyber Emergency Playbook</h2>
+        </div>
+        <div class="topbar-right">
+          <a href="tel:1930" class="btn btn-danger btn-sm" style="font-weight:700;">
+            📞 Emergency Speed-Dial: 1930
+          </a>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <div style="max-width: 960px; margin: 0 auto;">
+
+          <!-- Intro Banner -->
+          <div class="scanner-intro">
+            <h2>🚨 Just Been Targeted or Scammed? Act Immediately</h2>
+            <p>
+              In cybercrime, the first <strong>2 hours ("The Golden Hour")</strong> determine whether stolen funds can be frozen in recipient mule accounts. Select your exact situation below for the immediate step-by-step containment protocol.
+            </p>
+          </div>
+
+          <!-- Situation Protocol Selector Cards -->
+          <div class="protocol-grid">
+            <div class="protocol-card active" data-protocol="upi-loss">
+              <div class="protocol-title">
+                <span>💸</span> Transferred Money via UPI / Bank
+              </div>
+              <p class="protocol-desc">
+                Authorized an unintended debit, entered UPI PIN on a collect request, or sent cash to a scammer.
+              </p>
+            </div>
+
+            <div class="protocol-card" data-protocol="apk-malware">
+              <div class="protocol-title">
+                <span>📱</span> Installed Suspicious APK / Remote App
+              </div>
+              <p class="protocol-desc">
+                Downloaded an app from an SMS link or installed AnyDesk, QuickSupport, or RustDesk on scammer instructions.
+              </p>
+            </div>
+
+            <div class="protocol-card" data-protocol="otp-compromise">
+              <div class="protocol-title">
+                <span>🔑</span> Disclosed OTP, CVV, or Password
+              </div>
+              <p class="protocol-desc">
+                Shared a one-time SMS code, debit card CVV, or netbanking credentials on a fake form or phone call.
+              </p>
+            </div>
+
+            <div class="protocol-card" data-protocol="digital-arrest">
+              <div class="protocol-title">
+                <span>👮</span> Threatened with "Digital Arrest"
+              </div>
+              <p class="protocol-desc">
+                Fictitious police/CBI/Customs officers on video call claiming seized parcels, arrest warrants, or money laundering.
+              </p>
+            </div>
+          </div>
+
+          <!-- Active Protocol Interactive Step-by-Step Box -->
+          <div class="playbook-steps" id="playbook-steps-container">
+            <!-- Dynamic step contents rendered by JavaScript -->
+          </div>
+
+          <!-- ============================================== -->
+          <!-- AUTOMATED FORMAL POLICE / BANK COMPLAINT DRAFT -->
+          <!-- ============================================== -->
+          <div class="card" style="margin-bottom: 36px; border: 1px solid rgba(0, 229, 255, 0.35);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:14px; flex-wrap:wrap; gap:10px;">
+              <div>
+                <span style="font-size:0.75rem; text-transform:uppercase; color:var(--cyan); font-weight:700; letter-spacing:0.08em;">Statutory Documentation Tool</span>
+                <h3 style="font-size:1.25rem; color:#fff; margin-top:2px;">Automated Cyber Crime Complaint &amp; Bank Dispute Generator</h3>
+                <p style="font-size:0.84rem; color:var(--text-muted); margin-top:2px;">
+                  Generates a legally structured formal dispute letter citing <strong>Section 66D IT Act 2000</strong> and <strong>RBI Customer Protection Circular</strong>.
+                </p>
+              </div>
+              <span class="badge-risk low-risk" style="font-size:0.75rem;">PRINT &amp; SUBMIT READY</span>
+            </div>
+
+            <form id="complaint-generator-form">
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px;">
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Your Full Legal Name *</label>
+                  <input type="text" class="form-input" id="comp-name" placeholder="e.g. Ramesh Kumar" required>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Your Contact Number *</label>
+                  <input type="tel" class="form-input" id="comp-phone" placeholder="e.g. 9876543210" required>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Your Bank Name *</label>
+                  <input type="text" class="form-input" id="comp-bank" placeholder="e.g. State Bank of India" required>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Your Account / Debit Card (Last 4) *</label>
+                  <input type="text" class="form-input" id="comp-acc" placeholder="e.g. A/C ending in 4102" required>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px;">
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Disputed Amount Incurred (₹) *</label>
+                  <input type="number" class="form-input" id="comp-amount" placeholder="e.g. 25000" required>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Transaction Ref / UTR Number *</label>
+                  <input type="text" class="form-input" id="comp-utr" placeholder="e.g. 409823910245" required>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Suspect Contact / UPI ID *</label>
+                  <input type="text" class="form-input" id="comp-suspect" placeholder="e.g. fraudster@ybl or 9812345678" required>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size:0.8rem;">Date &amp; Time of Transaction *</label>
+                  <input type="datetime-local" class="form-input" id="comp-date" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" style="font-size:0.8rem;">Modus Operandi Summary (Brief) *</label>
+                <input type="text" class="form-input" id="comp-summary" placeholder="e.g. Posed as electricity officer threatening power cutoff; instructed UPI PIN entry on collect request." required>
+              </div>
+
+              <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="submit" class="btn btn-primary" id="btn-generate-complaint">Generate Legal Complaint Letter</button>
+              </div>
+            </form>
+
+            <div id="complaint-output-section" style="display:none; margin-top:24px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                <span style="font-size:0.85rem; font-weight:700; color:var(--cyan);">Formal Complaint Letter (Ready for Bank &amp; Police Submission)</span>
+                <div style="display:flex; gap:8px;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-complaint">📋 Copy Letter Text</button>
+                  <button type="button" class="btn btn-outline btn-sm" id="btn-print-complaint">🖨️ Print / Save PDF</button>
+                </div>
+              </div>
+              <div class="complaint-preview-box" id="complaint-preview-text"></div>
+            </div>
+          </div>
+
+          <!-- ============================================== -->
+          <!-- DIRECT BANK & WALLET EMERGENCY FREEZE DIRECTORY -->
+          <!-- ============================================== -->
+          <div class="card" style="margin-bottom: 40px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+              <div>
+                <h3 style="font-size:1.15rem; font-weight:700; color:#fff;">Direct Bank &amp; Payment Wallet Emergency Freeze Directory</h3>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-top:2px;">Call immediately to freeze debit cards, mobile banking, and recipient UPI handles.</p>
+              </div>
+              <input type="text" id="search-bank-input" class="form-input" placeholder="Search bank or wallet..." style="max-width:240px; margin-bottom:0; padding:6px 12px; font-size:0.85rem;">
+            </div>
+
+            <div class="bank-directory-grid" id="bank-directory-grid">
+              <!-- Rendered via JavaScript -->
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/emergency.js"></script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scam Detector | CYBERSHIELD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/scanner.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">
+          <svg class="shield-icon" style="width:28px; height:28px; stroke:var(--cyan-accent); fill:none; stroke-width:2.2;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CYBERSHIELD
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        <a href="user-dashboard.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Dashboard
+        </a>
+
+        <div class="nav-section-title">Detection Engines</div>
+        <a href="url-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          URL Scanner
+        </a>
+        <a href="scam-detector.html" class="sidebar-link active">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Scam Detector
+        </a>
+        <a href="email-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Checker
+        </a>
+        <a href="phone-checker.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Phone Checker
+        </a>
+        <a href="qr-scanner.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          QR Scanner
+        </a>
+
+        <div class="nav-section-title">Personal Security</div>
+        <a href="scan-history.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Scan History
+        </a>
+        <a href="security-score.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Security Score
+        </a>
+        <a href="awareness.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Awareness Hub
+        </a>
+        <a href="quiz.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          Cyber Crime Quiz
+        </a>
+        <a href="emergency-playbook.html" class="sidebar-link" style="color:#ef4444; font-weight:700;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+          Emergency Playbook 🚨
+        </a>
+        <a href="simulator.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+          Threat Simulator 🧪
+        </a>
+        <a href="report.html" class="sidebar-link" style="color: #f87171;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          Report to Cyber Agents 🚨
+        </a>
+        <a href="profile.html" class="sidebar-link">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="login.html" onclick="Auth.logout();" class="sidebar-link" style="color: #ef4444;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');">☰</button>
+          <h2 class="page-heading">Scam Message Detector</h2>
+        </div>
+        <div class="topbar-right">
+          <a href="report.html" class="btn btn-outline btn-sm">Report This Scam</a>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <div class="scanner-container">
+          <div class="scanner-intro">
+            <h2>Social Engineering &amp; Fraud Message Detector</h2>
+            <p>
+              Paste any suspicious SMS, WhatsApp message, Telegram recruitment text, or email alert. CyberShield detects psychological coercion, fraudulent lottery claims, and unauthorized OTP requests.
+            </p>
+          </div>
+
+          <!-- Input Card -->
+          <div class="scanner-input-card">
+            <form id="message-scan-form">
+              <div class="form-group">
+                <textarea id="message-input" class="scanner-textarea" placeholder="Paste the full SMS, WhatsApp message, Telegram offer, or suspicious message here..." required></textarea>
+                <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.78rem; color:var(--text-muted);">
+                  <span>Embedded links will be automatically extracted and analyzed by the central security engine.</span>
+                  <span id="char-count">0 characters</span>
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:flex-end;">
+                <button type="submit" class="btn btn-primary" id="btn-analyze-msg">
+                  Detect Scam Indicators
+                </button>
+              </div>
+            </form>
+
+            <!-- Sample Messages Covering Common Scam Vectors -->
+            <div style="margin-top: 20px; border-top:1px solid rgba(255,255,255,0.06); padding-top:16px;">
+              <span style="font-size:0.78rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; display:block; margin-bottom:8px;">Load Real-World Scam Scenarios:</span>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                <button type="button" class="btn btn-secondary btn-sm sample-msg-btn" data-msg="URGENT ALERT: Your SBI debit card and net banking has been blocked today due to pending KYC. Update your PAN card immediately or account will be suspended: http://sbi-kyc-verify-portal.in">Bank KYC Suspension</button>
+                <button type="button" class="btn btn-secondary btn-sm sample-msg-btn" data-msg="Dear consumer, your electricity power will be disconnected tonight at 9:30 PM from electricity office because your previous month bill was not updated. Please immediately contact our officer at 9876543210.">Electricity Bill Disconnection</button>
+                <button type="button" class="btn btn-secondary btn-sm sample-msg-btn" data-msg="This is Officer Sharma from CBI / Mumbai Crime Branch. An illegal narcotics parcel linked to your Aadhaar was intercepted at customs. A digital arrest warrant has been issued. Do not disconnect this call or inform anyone.">Digital Arrest Scam</button>
+                <button type="button" class="btn btn-secondary btn-sm sample-msg-btn" data-msg="Congratulations! You won ₹25,00,000 cash prize in our Lucky Draw. Click this link immediately to claim your winnings before it expires: http://lottery-claim-portal.xyz/win">Prize / Lottery Lure</button>
+                <button type="button" class="btn btn-secondary btn-sm sample-msg-btn" data-msg="Government approved part-time job from home: Earn ₹5,000 daily by liking YouTube videos and rating hotels. No investment required. Contact our HR manager on Telegram @official_task_hr">Part-Time Job Scam</button>
+                <button type="button" class="btn btn-secondary btn-sm sample-msg-btn" data-msg="Your ICICI Bank account verification code is 492018. It is valid for 10 minutes. Do not share this OTP with anyone, including bank officials.">Legitimate OTP Baseline</button>
+              </div>
+
+              <!-- Standardized Pattern Signatures (19 Patterns) -->
+              <span style="font-size:0.78rem; text-transform:uppercase; color:var(--cyan-accent); font-weight:700; display:block; margin-bottom:8px;">⚡ Recognized Threat Pattern Signatures (Click to Test):</span>
+              <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="G-Your Aadhaar verification is pending. Update your biometric details immediately to prevent deactivation: https://uidai-aadhaar-verify.xyz">G- (Govt Claim)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="BANK-Your account will be blocked within 24 hours due to unverified PAN. Update now.">BANK- (Banking Claim)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="KYC-Update your KYC immediately or all debit transactions will be frozen.">KYC- (KYC Claim)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="UPI-Approve the request to receive refund of ₹4,999 in GooglePay.">UPI- (Payment Claim)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="OTP-Share the OTP to complete verification of your incoming transaction.">OTP- (OTP Solicitation)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="CARD-Your card will expire today. Re-validate card CVV to avoid ₹500 penalty.">CARD- (Card Claim)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="TAX-Your refund is waiting for verification. Claim your ₹15,420 tax rebate.">TAX- (Tax Claim)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="CBI-Your number is linked to a criminal case and money laundering investigation.">CBI- (CBI Impersonation)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="POLICE-Your account is under investigation. Cooperate with investigating officers immediately.">POLICE- (Police Impersonation)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="COURT-A warrant has been issued against you under Section 420. Download legal notice.">COURT- (Legal Threat)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="JOB-Earn ₹5000 daily by completing tasks from home. Daily payouts.">JOB- (Job Scam)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="REWARD-You have won a ₹50,000 reward from shopping scratch card.">REWARD- (Reward Bait)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="LOTTERY-You have won ₹10 lakh in All-India Mega Lucky Draw.">LOTTERY- (Lottery Scam)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="REFUND-Click to receive your refund for order #88419.">REFUND- (Refund Bait)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="ACCOUNT-Your account will be suspended today due to security policy violations.">ACCOUNT- (Account Threat)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="URGENT-Verify immediately to restore uninterrupted banking services.">URGENT- (Urgency)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="VERIFY-Confirm your details now to validate your credentials.">VERIFY- (Verification)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="APK-Install this app to receive your refund: https://rewards-claim.top/app.apk">APK- (APK Malware)</button>
+                <button type="button" class="btn btn-outline btn-sm sample-msg-btn" style="font-size:0.75rem; padding:4px 9px;" data-msg="ARREST-You will be arrested unless you cooperate with financial enforcement agents.">ARREST- (Digital Arrest)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step-by-Step Animated Loader -->
+          <div class="loading-box" id="scanner-loading">
+            <div class="cyber-radar-spinner"></div>
+            <div class="loading-text">Analyzing Linguistic &amp; Social Engineering Signals</div>
+            <div class="loading-steps-indicator" id="loading-step-text">Evaluating message text...</div>
+          </div>
+
+          <!-- Explainable Result Card -->
+          <div class="result-card" id="scanner-result">
+            <div class="result-header">
+              <div class="result-title-group">
+                <span class="risk-level-tag badge-risk" id="result-risk-tag">UNKNOWN</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Social Engineering Profile</span>
+              </div>
+
+              <div class="score-meter-wrap">
+                <span style="font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Deception Score:</span>
+                <span class="score-number" id="result-score-num">0</span>
+                <span style="font-size:0.9rem; color:var(--text-muted);">/ 100</span>
+                <div class="score-bar-bg">
+                  <div class="score-bar-fill" id="result-score-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="result-body">
+              <!-- Structured Pattern Match Chips -->
+              <div id="result-patterns-box" style="display:none; margin-bottom:16px; background:rgba(0, 229, 255, 0.08); border:1px solid rgba(0, 229, 255, 0.3); border-radius:var(--radius-md); padding:12px 16px;">
+                <div style="font-size:0.78rem; text-transform:uppercase; color:var(--cyan-accent); font-weight:700; margin-bottom:6px;">🎯 Recognized Threat Pattern Signatures:</div>
+                <div id="result-patterns-chips" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+              </div>
+
+              <!-- What was found & Why -->
+              <div class="explain-section">
+                <h4>What was found &amp; Analysis Reason</h4>
+                <div class="explain-text" id="result-explanation"></div>
+              </div>
+
+              <!-- Detected Indicators -->
+              <div class="explain-section">
+                <h4>Detected Scam Indicators</h4>
+                <div class="indicators-list" id="result-indicators-list"></div>
+              </div>
+
+              <!-- Recommendations -->
+              <div class="recommendation-box">
+                <h4>Recommended Citizen Defense Steps</h4>
+                <ul class="recommendation-list" id="result-recommendations-list"></ul>
+              </div>
+
+              <!-- Cyber Agent Escalation Card -->
+              <div class="agent-dispatch-box" id="result-agent-dispatch-box" style="margin-top:20px; padding:16px 20px; background:rgba(239, 68, 68, 0.08); border:1px solid rgba(239, 68, 68, 0.4); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                <div>
+                  <div style="font-size:0.88rem; font-weight:700; color:#f87171; display:flex; align-items:center; gap:6px;">
+                    <span>🚨</span> Scam Message Detected? Report to Cyber Crime Agents
+                  </div>
+                  <div style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">
+                    Dispatch this fraudulent message, sender headers, and VPA to the National Cyber Crime Bureau (I4C / 1930) and Telecom Anti-Smishing cell.
+                  </div>
+                </div>
+                <a href="report.html" id="btn-escalate-cyber-agent" class="btn btn-danger btn-sm" style="background:#dc2626; border-color:#ef4444; font-weight:700; text-decoration:none;">
+                  🚨 Report to Cyber Agents
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- COMPREHENSIVE SCAM MESSAGE DETECTION GUIDE -->
+          <!-- ========================================== -->
+          <div class="card" style="margin-top: 36px; padding: 28px; border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(9, 14, 26, 0.75);">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+              <div>
+                <span style="font-size:0.75rem; text-transform:uppercase; color:var(--cyan); font-weight:700; letter-spacing:0.08em;">Educational Reference Architecture</span>
+                <h3 style="font-size:1.4rem; margin-top:4px; color:#fff;">How to Identify Scam Messages &amp; Social Engineering</h3>
+              </div>
+              <span class="badge-risk low-risk" style="font-size:0.75rem;">Behavioral Engine Guide</span>
+            </div>
+
+            <!-- Visual Anatomy of a Scam Message -->
+            <div style="margin-bottom: 28px;">
+              <h4 style="font-size:0.95rem; color:var(--cyan); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">1. Anatomy of a Scam Message</h4>
+              <div style="background: rgba(6, 12, 26, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 18px;">
+                <div style="font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; background: rgba(0,0,0,0.4); padding: 16px; border-radius: var(--radius-sm); border-left: 3px solid #ef4444;">
+                  <span style="background: rgba(239, 68, 68, 0.2); color: #f87171; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(239,68,68,0.3); font-weight:700;">URGENT:</span> 
+                  <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(245,158,11,0.3);">Electricity Office:</span> 
+                  Your power will be disconnected 
+                  <span style="background: rgba(239, 68, 68, 0.2); color: #f87171; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(239,68,68,0.3); font-weight:700;">tonight at 9:30 PM</span> 
+                  due to unpaid bill. Immediately update details or call officer at 
+                  <span style="background: rgba(147, 51, 234, 0.2); color: #c084fc; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(147,51,234,0.3);">9876543210</span> 
+                  or visit 
+                  <span style="background: rgba(0, 229, 255, 0.2); color: var(--cyan); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.3);">http://power-bill-pay.xyz</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.82rem;">
+                  <div style="color: #f87171;"><strong style="display:block;">Urgency Trigger</strong> Forces victim into panic to bypass critical reasoning.</div>
+                  <div style="color: #fbbf24;"><strong style="display:block;">Authority Claim</strong> Impersonates government bodies, banks, or utility services.</div>
+                  <div style="color: #f87171;"><strong style="display:block;">Tight Deadline</strong> "Tonight at 9:30 PM" prevents calling official helplines.</div>
+                  <div style="color: #c084fc;"><strong style="display:block;">Personal Phone Number</strong> Directs you to the fraudster instead of an official landline.</div>
+                  <div style="color: var(--cyan);"><strong style="display:block;">Phishing Action Link</strong> Harvests net banking passwords or triggers remote APK installs.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Engineering Myths -->
+            <div style="margin-bottom: 28px;">
+              <h4 style="font-size:0.95rem; color:#f59e0b; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">2. Critical Social Engineering Myths</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-md); padding: 16px;">
+                  <div style="font-weight: 700; color: #ef4444; margin-bottom: 6px; display:flex; align-items:center; gap:8px;">
+                    <span>👮 Myth 1:</span> "Police or CBI can arrest you over a Skype/WhatsApp video call."
+                  </div>
+                  <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin:0;">
+                    <strong>Reality:</strong> <strong>"Digital Arrest" does not exist</strong> in Indian or international law. Law enforcement agencies (CBI, ED, Police, Customs) never conduct interrogations, trials, or arrests via video calls, nor do they demand money transfers to "verify funds."
+                  </p>
+                </div>
+                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-md); padding: 16px;">
+                  <div style="font-weight: 700; color: #f59e0b; margin-bottom: 6px; display:flex; align-items:center; gap:8px;">
+                    <span>🏛️ Myth 2:</span> "The message says 'Government / RBI Approved', so it must be real."
+                  </div>
+                  <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin:0;">
+                    <strong>Reality:</strong> Scammers deliberately print the names of trusted authorities (RBI, Police, Income Tax) precisely to stop victims from questioning the message. The claim itself is evidence of an assertion, never proof.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Standardized Threat Pattern Signatures Catalog (19 Patterns) -->
+            <div style="margin-bottom: 28px;">
+              <h4 style="font-size:0.95rem; color:var(--cyan); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">3. Standardized Scam Message Signatures (19 Patterns)</h4>
+              <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:12px;">CYBERSHIELD's behavioral engine scans incoming messages for these 19 recognized threat pattern signatures:</p>
+              
+              <div style="overflow-x:auto; background:rgba(6, 12, 26, 0.8); border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius-md);">
+                <table style="width:100%; border-collapse:collapse; font-size:0.82rem; text-align:left;">
+                  <thead>
+                    <tr style="background:rgba(0, 229, 255, 0.08); border-bottom:1px solid rgba(0, 229, 255, 0.2); color:var(--cyan);">
+                      <th style="padding:10px 14px;">Pattern Prefix</th>
+                      <th style="padding:10px 14px;">Meaning to Detect</th>
+                      <th style="padding:10px 14px;">Real-World Scam Example</th>
+                    </tr>
+                  </thead>
+                  <tbody style="color:#e2e8f0;">
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">G-</code></td><td style="padding:8px 14px;">Government-related claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>G-Your Aadhaar verification is pending</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">BANK-</code></td><td style="padding:8px 14px;">Banking-related claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>BANK-Your account will be blocked</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">KYC-</code></td><td style="padding:8px 14px;">KYC-related claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>KYC-Update your KYC immediately</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">UPI-</code></td><td style="padding:8px 14px;">UPI/payment claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>UPI-Approve the request to receive refund</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">OTP-</code></td><td style="padding:8px 14px;">OTP-related claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>OTP-Share the OTP to complete verification</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">CARD-</code></td><td style="padding:8px 14px;">Debit/credit card claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>CARD-Your card will expire today</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">TAX-</code></td><td style="padding:8px 14px;">Tax-related claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>TAX-Your refund is waiting for verification</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#f87171; font-weight:700;">CBI-</code></td><td style="padding:8px 14px;">Police/CBI impersonation claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>CBI-Your number is linked to a criminal case</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#f87171; font-weight:700;">POLICE-</code></td><td style="padding:8px 14px;">Police impersonation claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>POLICE-Your account is under investigation</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#f87171; font-weight:700;">COURT-</code></td><td style="padding:8px 14px;">Court/legal-threat claim</td><td style="padding:8px 14px; color:#cbd5e1;"><code>COURT-A warrant has been issued against you</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#fbbf24; font-weight:700;">JOB-</code></td><td style="padding:8px 14px;">Job scam pattern</td><td style="padding:8px 14px; color:#cbd5e1;"><code>JOB-Earn ₹5000 daily by completing tasks</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#fbbf24; font-weight:700;">REWARD-</code></td><td style="padding:8px 14px;">Prize/reward bait</td><td style="padding:8px 14px; color:#cbd5e1;"><code>REWARD-You have won a ₹50,000 reward</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#fbbf24; font-weight:700;">LOTTERY-</code></td><td style="padding:8px 14px;">Lottery scam pattern</td><td style="padding:8px 14px; color:#cbd5e1;"><code>LOTTERY-You have won ₹10 lakh</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#fbbf24; font-weight:700;">REFUND-</code></td><td style="padding:8px 14px;">Refund bait</td><td style="padding:8px 14px; color:#cbd5e1;"><code>REFUND-Click to receive your refund</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">ACCOUNT-</code></td><td style="padding:8px 14px;">Account-threat pattern</td><td style="padding:8px 14px; color:#cbd5e1;"><code>ACCOUNT-Your account will be suspended today</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">URGENT-</code></td><td style="padding:8px 14px;">Urgency pattern</td><td style="padding:8px 14px; color:#cbd5e1;"><code>URGENT-Verify immediately</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#38bdf8; font-weight:700;">VERIFY-</code></td><td style="padding:8px 14px;">Verification request</td><td style="padding:8px 14px; color:#cbd5e1;"><code>VERIFY-Confirm your details now</code></td></tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.04);"><td style="padding:8px 14px;"><code style="color:#ef4444; font-weight:700;">APK-</code></td><td style="padding:8px 14px;">Suspicious APK/download pattern</td><td style="padding:8px 14px; color:#cbd5e1;"><code>APK-Install this app to receive your refund</code></td></tr>
+                    <tr><td style="padding:8px 14px;"><code style="color:#ef4444; font-weight:700;">ARREST-</code></td><td style="padding:8px 14px;">Arrest/digital-arrest pattern</td><td style="padding:8px 14px; color:#cbd5e1;"><code>ARREST-You will be arrested unless you cooperate</code></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- 6 Heuristic Pillars Grid -->
+            <div style="margin-bottom: 28px;">
+              <h4 style="font-size:0.95rem; color:var(--cyan); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">4. The 6 Heuristic Pillars Inspected by CyberShield</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">1. Artificial Urgency &amp; Fear</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Triggers: "immediately", "within 24 hours", "account blocked", "fine of ₹50,000".</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> True organizations send formal notices, not panic SMS messages.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">2. False Financial Lures</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Triggers: "won ₹25,00,000", "lottery claim", "earn ₹5,000/day liking videos".</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> You cannot win a lottery or prize you never entered.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">3. Authority Impersonation</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Faking police, CBI, RBI, tax officials, or bank security teams.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> Verify through official portals; never reply to unsolicited contacts.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">4. Credential &amp; OTP Harvesting</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Demanding PINs, OTP codes, card CVVs, or Net Banking passwords.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> Bank staff will NEVER ask for your OTP or password.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">5. Isolation &amp; Secrecy Demands</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Commands like "stay on call", "do not tell family", "room lock required".</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> Isolation is the hallmark of coercion scams. Disconnect immediately.</div>
+                </div>
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 14px;">
+                  <div style="color: var(--cyan); font-weight: 700; font-size: 0.88rem; margin-bottom: 4px;">6. Embedded Phishing Links</div>
+                  <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 6px;">Directing victims to fake portals or prompting APK downloads.</p>
+                  <div style="font-size: 0.78rem; color: #fde68a;"><strong>Defense:</strong> CyberShield automatically extracts and deep-scans all embedded links.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4-Step Checklist -->
+            <div>
+              <h4 style="font-size:0.95rem; color:#10b981; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">4. Four-Step Citizen Defense Checklist</h4>
+              <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-md); padding: 16px;">
+                <ol style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: #e2e8f0; display:flex; flex-direction:column; gap:6px;">
+                  <li><strong>Take a 5-minute pause:</strong> High-pressure urgency is designed to make you act before thinking. Step back.</li>
+                  <li><strong>Never use the numbers or links in the message:</strong> Call the official customer helpline printed on the back of your debit card or bill.</li>
+                  <li><strong>Remember the golden rule of OTP:</strong> An OTP is required ONLY to debit money from your account, never to receive money.</li>
+                  <li><strong>Report immediately:</strong> If you receive an impersonation attempt, report it on CyberShield or the National Cyber Crime Portal (1930).</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/scam-detector.js"></script>
+</body>
+</html>
