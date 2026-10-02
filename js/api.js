@@ -2,20 +2,15 @@
  * CYBERSHIELD - Central API Client & Authentication Management
  */
 
-// Dynamically determine API base URL.
-// The Node.js Express backend runs on port 5000.
-// If the frontend is served via Node (port 5000), use origin.
-// If opened via VS Code Live Server (port 5500), file://, or another dev port, target http://localhost:5000.
-let API_BASE_URL ='https://cybershields-backend.onrender.com';;
+// Production Render Backend API URL
+let API_BASE_URL = 'https://cybershields-backend.onrender.com';
 if (typeof window !== 'undefined') {
   if (window.CYBERSHIELD_API_URL) {
     API_BASE_URL = window.CYBERSHIELD_API_URL;
-  } else if (window.location.port === '5000') {
-    API_BASE_URL = window.location.origin;
-  } else if (window.location.origin && window.location.origin.startsWith('http') && !window.location.port) {
-    API_BASE_URL = window.location.origin;
+  } else if (window.location.search && window.location.search.includes('local=true')) {
+    API_BASE_URL = 'http://localhost:5000';
   } else {
-    API_BASE_URL = 'https://cybershields-backend.onrender.com';;
+    API_BASE_URL = 'https://cybershields-backend.onrender.com';
   }
 }
 
