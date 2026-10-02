@@ -2,12 +2,12 @@
  * CYBERSHIELD - Central API Client & Authentication Management
  */
 
-// Production Render Backend API URL
+// API Base URL: Automatically targets local backend on localhost/127.0.0.1, and Render in production
 let API_BASE_URL = 'https://cybershields-backend.onrender.com';
 if (typeof window !== 'undefined') {
   if (window.CYBERSHIELD_API_URL) {
     API_BASE_URL = window.CYBERSHIELD_API_URL;
-  } else if (window.location.search && window.location.search.includes('local=true')) {
+  } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     API_BASE_URL = 'http://localhost:5000';
   } else {
     API_BASE_URL = 'https://cybershields-backend.onrender.com';
