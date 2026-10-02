@@ -1,387 +1,231 @@
-```javascript
 /**
- * CYBERSHIELD - Central API Client & Authentication Management
+ * CYBERSHIELD - API Client & Authentication
  */
 
-// ============================================================
-// BACKEND API URL
-// Frontend: Vercel
-// Backend: Render
-// ============================================================
 const API_BASE_URL = 'https://cybershields-backend.onrender.com';
 
-const STORAGE_KEYS = {
-  TOKEN: 'cybershield_auth_token',
-  USER: 'cybershield_auth_user'
-};
+/* =========================
+   API REQUEST FUNCTION
+========================= */
 
-// ============================================================
-// AUTHENTICATION MANAGEMENT
-// ============================================================
-const Auth = {
-  getToken() {
-    return localStorage.getItem(STORAGE_KEYS.TOKEN);
-  },
-
-  setToken(token) {
-    localStorage.setItem(STORAGE_KEYS.TOKEN, token);
-  },
-
-  getUser() {
-    try {
-      const user = localStorage.getItem(STORAGE_KEYS.USER);
-      return user ? JSON.parse(user) : null;
-    } catch {
-      return null;
-    }
-  },
-
-  setUser(user) {
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
-  },
-
-  isAuthenticated() {
-    return Boolean(this.getToken());
-  },
-
-  isAdmin() {
-    const user = this.getUser();
-    return Boolean(user && user.role === 'admin');
-  },
-
-  logout(redirectUrl = 'login.html') {
-    localStorage.removeItem(STORAGE_KEYS.TOKEN);
-    localStorage.removeItem(STORAGE_KEYS.USER);
-    window.location.href = redirectUrl;
-  },
-
-  requireAuth() {
-    if (!this.isAuthenticated()) {
-      window.location.href =
-        'login.html?redirect=' +
-        encodeURIComponent(window.location.pathname);
-
-      return false;
-    }
-
-    return true;
-  },
-
-  requireAdmin() {
-    if (!this.isAuthenticated()) {
-      window.location.href =
-        'login.html?redirect=' +
-        encodeURIComponent(window.location.pathname);
-
-      return false;
-    }
-
-    if (!this.isAdmin()) {
-      window.location.href = 'user-dashboard.html';
-      return false;
-    }
-
-    return true;
-  }
-};
-
-// ============================================================
-// TOAST NOTIFICATION
-// ============================================================
-function showToast(message, type = 'info', duration = 4000) {
-  let container = document.getElementById('toast-container');
-
-  if (!container) {
-    container = document.createElement('div');
-    container.id = 'toast-container';
-    container.className = 'toast-container';
-    document.body.appendChild(container);
-  }
-
-  const toast = document.createElement('div');
-  toast.className = `toast-item toast-${type}`;
-
-  const iconMap = {
-    success: '✓',
-    error: '✕',
-    warning: '⚠',
-    info: 'ℹ'
-  };
-
-  toast.innerHTML = `
-    <span class="toast-icon">${iconMap[type] || 'ℹ'}</span>
-    <span class="toast-message">${escapeHtml(message)}</span>
-    <button class="toast-close" onclick="this.parentElement.remove()">&times;</button>
-  `;
-
-  container.appendChild(toast);
-
-  requestAnimationFrame(() => {
-    toast.classList.add('toast-show');
-  });
-
-  setTimeout(() => {
-    toast.classList.remove('toast-show');
-
-    setTimeout(() => {
-      toast.remove();
-    }, 300);
-  }, duration);
-}
-
-// ============================================================
-// HTML ESCAPE
-// ============================================================
-function escapeHtml(str) {
-  if (typeof str !== 'string') return '';
-
-  return str.replace(/[&<>"']/g, function (m) {
-    return {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    }[m];
-  });
-}
-
-// ============================================================
-// CORE API REQUEST FUNCTION
-// ============================================================
 async function apiFetch(endpoint, options = {}) {
-  const url = endpoint.startsWith('http')
-    ? endpoint
-    : `${API_BASE_URL}${endpoint}`;
+    const url = endpoint.startsWith('http')
+        ? endpoint
+        : `${API_BASE_URL}${endpoint}`;
 
-  const token = Auth.getToken();
+    const token = localStorage.getItem('cybershield_token');
 
-  const headers = {
-    'Accept': 'application/json',
-    ...(options.headers || {})
-  };
+    const config = {
+        method: options.method || 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            ...(options.headers || {})
+        }
+    };
 
-  if (
-    options.body &&
-    !(options.body instanceof FormData) &&
-    typeof options.body === 'object'
-  ) {
-    headers['Content-Type'] = 'application/json';
-    options.body = JSON.stringify(options.body);
-  }
-
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
-
-  try {
-    const res = await fetch(url, {
-      ...options,
-      headers
-    });
-
-    const data = await res.json().catch(() => ({}));
-
-    if (!res.ok) {
-      // Handle expired session
-      if (res.status === 401 && Auth.isAuthenticated()) {
-        Auth.logout();
-
-        throw new Error(
-          'Your session has expired. Please log in again.'
-        );
-      }
-
-      const errorMsg =
-        data?.error?.message ||
-        data?.message ||
-        `Request failed with status ${res.status}`;
-
-      const err = new Error(errorMsg);
-
-      err.status = res.status;
-      err.code = data?.error?.code;
-
-      throw err;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
 
-    return data;
-
-  } catch (err) {
-
-    if (
-      err.name === 'TypeError' &&
-      err.message.includes('fetch')
-    ) {
-      throw new Error(
-        'CyberShield server is currently unavailable. Please try again.'
-      );
+    if (options.body !== undefined) {
+        config.body =
+            typeof options.body === 'string'
+                ? options.body
+                : JSON.stringify(options.body);
     }
 
-    throw err;
-  }
+    try {
+        const response = await fetch(url, config);
+
+        const text = await response.text();
+
+        let data;
+
+        try {
+            data = text ? JSON.parse(text) : {};
+        } catch {
+            data = {
+                success: false,
+                message: text || 'Invalid server response'
+            };
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                data?.message ||
+                data?.error?.message ||
+                `Request failed with status ${response.status}`
+            );
+        }
+
+        return data;
+
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }
 }
 
-// ============================================================
-// SCANNERS API
-// ============================================================
-const ScannersAPI = {
 
-  scanUrl: (url) =>
-    apiFetch('/api/scan/url', {
-      method: 'POST',
-      body: { url }
-    }),
+/* =========================
+   AUTHENTICATION
+========================= */
 
-  scanMessage: (message) =>
-    apiFetch('/api/scan/message', {
-      method: 'POST',
-      body: { message }
-    }),
+const Auth = {
 
-  scanEmail: (email) =>
-    apiFetch('/api/scan/email', {
-      method: 'POST',
-      body: { email }
-    }),
+    setToken(token) {
+        localStorage.setItem('cybershield_token', token);
+    },
 
-  scanPhone: (phone) =>
-    apiFetch('/api/scan/phone', {
-      method: 'POST',
-      body: { phone }
-    }),
+    getToken() {
+        return localStorage.getItem('cybershield_token');
+    },
 
-  scanQr: (content) =>
-    apiFetch('/api/scan/qr', {
-      method: 'POST',
-      body: { content }
-    })
+    removeToken() {
+        localStorage.removeItem('cybershield_token');
+    },
+
+    setUser(user) {
+        localStorage.setItem(
+            'cybershield_user',
+            JSON.stringify(user)
+        );
+    },
+
+    getUser() {
+        const user = localStorage.getItem('cybershield_user');
+
+        if (!user) {
+            return null;
+        }
+
+        try {
+            return JSON.parse(user);
+        } catch {
+            return null;
+        }
+    },
+
+    removeUser() {
+        localStorage.removeItem('cybershield_user');
+    },
+
+    isAuthenticated() {
+        return !!this.getToken();
+    },
+
+    logout() {
+        this.removeToken();
+        this.removeUser();
+        window.location.href = 'login.html';
+    }
 };
 
-// ============================================================
-// SCAN HISTORY API
-// ============================================================
-const HistoryAPI = {
 
-  getScans: (params = {}) => {
-    const qs = new URLSearchParams(params).toString();
+/* =========================
+   SCAN API
+========================= */
 
-    return apiFetch(`/api/scans?${qs}`);
-  },
+async function scanURL(url) {
+    return await apiFetch('/api/scan/url', {
+        method: 'POST',
+        body: { url }
+    });
+}
 
-  getScanById: (id) =>
-    apiFetch(`/api/scans/${id}`),
+async function scanMessage(message) {
+    return await apiFetch('/api/scan/message', {
+        method: 'POST',
+        body: { message }
+    });
+}
 
-  deleteScan: (id) =>
-    apiFetch(`/api/scans/${id}`, {
-      method: 'DELETE'
-    }),
+async function scanEmail(email) {
+    return await apiFetch('/api/scan/email', {
+        method: 'POST',
+        body: { email }
+    });
+}
 
-  getDashboardStats: () =>
-    apiFetch('/api/scans/dashboard-stats')
-};
+async function scanPhone(phone) {
+    return await apiFetch('/api/scan/phone', {
+        method: 'POST',
+        body: { phone }
+    });
+}
 
-// ============================================================
-// REPORTS API
-// ============================================================
-const ReportsAPI = {
 
-  submitReport: (data) =>
-    apiFetch('/api/reports', {
-      method: 'POST',
-      body: data
-    }),
+/* =========================
+   SCAN HISTORY
+========================= */
 
-  getReports: (params = {}) => {
-    const qs = new URLSearchParams(params).toString();
+async function getScanHistory() {
+    return await apiFetch('/api/scans/history');
+}
 
-    return apiFetch(`/api/reports?${qs}`);
-  },
 
-  getReportById: (id) =>
-    apiFetch(`/api/reports/${id}`),
+/* =========================
+   REPORTS
+========================= */
 
-  getReportByDocket: (docketNo) =>
-    apiFetch(
-      `/api/reports/docket/${encodeURIComponent(docketNo)}`
-    )
-};
+async function submitReport(reportData) {
+    return await apiFetch('/api/reports', {
+        method: 'POST',
+        body: reportData
+    });
+}
 
-// ============================================================
-// AWARENESS API
-// ============================================================
-const AwarenessAPI = {
+async function getReports() {
+    return await apiFetch('/api/reports');
+}
 
-  getModules: () =>
-    apiFetch('/api/awareness'),
 
-  getModuleById: (id) =>
-    apiFetch(`/api/awareness/${id}`),
+/* =========================
+   AWARENESS
+========================= */
 
-  completeModule: (id) =>
-    apiFetch(`/api/awareness/${id}/complete`, {
-      method: 'POST'
-    }),
+async function getAwarenessContent() {
+    return await apiFetch('/api/awareness');
+}
 
-  getQuizQuestions: () =>
-    apiFetch('/api/awareness/quiz/questions'),
 
-  submitQuiz: (answers) =>
-    apiFetch('/api/awareness/quiz/submit', {
-      method: 'POST',
-      body: { answers }
-    })
-};
+/* =========================
+   ADMIN
+========================= */
 
-// ============================================================
-// ADMIN API
-// ============================================================
-const AdminAPI = {
+async function getAdminUsers() {
+    return await apiFetch('/api/admin/users');
+}
 
-  getDashboard: () =>
-    apiFetch('/api/admin/dashboard'),
+async function getAdminReports() {
+    return await apiFetch('/api/admin/reports');
+}
 
-  getUsers: (params = {}) => {
-    const qs = new URLSearchParams(params).toString();
+async function getAdminScans() {
+    return await apiFetch('/api/admin/scans');
+}
 
-    return apiFetch(`/api/admin/users?${qs}`);
-  },
 
-  updateUserStatus: (id, data) =>
-    apiFetch(`/api/admin/users/${id}`, {
-      method: 'PATCH',
-      body: data
-    }),
+/* =========================
+   GLOBAL ACCESS
+========================= */
 
-  getScans: (params = {}) => {
-    const qs = new URLSearchParams(params).toString();
-
-    return apiFetch(`/api/admin/scans?${qs}`);
-  },
-
-  getReports: (params = {}) => {
-    const qs = new URLSearchParams(params).toString();
-
-    return apiFetch(`/api/admin/reports?${qs}`);
-  },
-
-  updateReport: (id, data) =>
-    apiFetch(`/api/admin/reports/${id}`, {
-      method: 'PATCH',
-      body: data
-    })
-};
-
-// ============================================================
-// GLOBAL ACCESS
-// ============================================================
 window.API_BASE_URL = API_BASE_URL;
-window.Auth = Auth;
-window.showToast = showToast;
 window.apiFetch = apiFetch;
-window.ScannersAPI = ScannersAPI;
-window.HistoryAPI = HistoryAPI;
-window.ReportsAPI = ReportsAPI;
-window.AwarenessAPI = AwarenessAPI;
-window.AdminAPI = AdminAPI;
-```
+window.Auth = Auth;
+
+window.scanURL = scanURL;
+window.scanMessage = scanMessage;
+window.scanEmail = scanEmail;
+window.scanPhone = scanPhone;
+
+window.getScanHistory = getScanHistory;
+
+window.submitReport = submitReport;
+window.getReports = getReports;
+
+window.getAwarenessContent = getAwarenessContent;
+
+window.getAdminUsers = getAdminUsers;
+window.getAdminReports = getAdminReports;
+window.getAdminScans = getAdminScans;
