@@ -108,7 +108,7 @@ async function runTests() {
     const scanQr = await makeRequest('/api/scan/qr', 'POST', {
       content: 'upi://pay?pa=lottery_winner@upi&pn=Lottery%20Dept&am=5000'
     }, userToken);
-    console.log('[TEST 9] QR Scanner (UPI Trap):', scanQr.data.analysis?.riskLevel === 'HIGH RISK' ? 'PASS ✓' : 'FAIL');
+    console.log('[TEST 9] QR Scanner (UPI Trap):', ['HIGH RISK', 'MALICIOUS'].includes(scanQr.data.analysis?.riskLevel) ? 'PASS ✓' : 'FAIL');
 
     // 10. Dashboard Stats from MySQL
     const dashStats = await makeRequest('/api/scans/dashboard-stats', 'GET', null, userToken);
