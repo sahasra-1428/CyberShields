@@ -229,3 +229,12 @@ window.getAwarenessContent = getAwarenessContent;
 window.getAdminUsers = getAdminUsers;
 window.getAdminReports = getAdminReports;
 window.getAdminScans = getAdminScans;
+/* =========================
+   TOAST MESSAGE
+========================= */
+
+function showToast(message, type = 'info') {
+    alert(message);
+}
+
+window.showToast = showToast;
