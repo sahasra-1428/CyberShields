@@ -238,3 +238,27 @@ function showToast(message, type = 'info') {
 }
 
 window.showToast = showToast;
+
+/* =========================
+   SCANNERS API
+========================= */
+
+const ScannersAPI = {
+    url: async function (url) {
+        return await scanURL(url);
+    },
+
+    message: async function (message) {
+        return await scanMessage(message);
+    },
+
+    email: async function (email) {
+        return await scanEmail(email);
+    },
+
+    phone: async function (phone) {
+        return await scanPhone(phone);
+    }
+};
+
+window.ScannersAPI = ScannersAPI;
